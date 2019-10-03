@@ -55,31 +55,33 @@
   };
 </script>
 
-  <meta name="description" content="Life is like a box of chocolates. You never know what you&apos;re gonna get.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="YJF❤️LY">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="自从读PhD以来，就想搭建一个属于自己的博客，记录一下博士生活。然而由于自己水平有限，简单研究过两下就放弃了。这次克服拖延症，在网上google一推教程，选定Hexo + github pages来搭建自己的博客。希望自己可以多多记录，好好学习，天天向上！在这里，简单记录一下博客的建立过程。">
+<meta name="keywords" content="Coding">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Build blog with hexo and github pages">
+<meta property="og:url" content="http://yoursite.com/2019/10/03/Build-blog-with-hexo-and-github-pages/index.html">
 <meta property="og:site_name" content="YJF❤️LY">
-<meta property="og:description" content="Life is like a box of chocolates. You never know what you&apos;re gonna get.">
+<meta property="og:description" content="自从读PhD以来，就想搭建一个属于自己的博客，记录一下博士生活。然而由于自己水平有限，简单研究过两下就放弃了。这次克服拖延症，在网上google一推教程，选定Hexo + github pages来搭建自己的博客。希望自己可以多多记录，好好学习，天天向上！在这里，简单记录一下博客的建立过程。">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-03T13:13:04.859Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="YJF❤️LY">
-<meta name="twitter:description" content="Life is like a box of chocolates. You never know what you&apos;re gonna get.">
-  <link rel="canonical" href="http://yoursite.com/">
+<meta name="twitter:title" content="Build blog with hexo and github pages">
+<meta name="twitter:description" content="自从读PhD以来，就想搭建一个属于自己的博客，记录一下博士生活。然而由于自己水平有限，简单研究过两下就放弃了。这次克服拖延症，在网上google一推教程，选定Hexo + github pages来搭建自己的博客。希望自己可以多多记录，好好学习，天天向上！在这里，简单记录一下博客的建立过程。">
+  <link rel="canonical" href="http://yoursite.com/2019/10/03/Build-blog-with-hexo-and-github-pages/">
 
 
 <script id="page-configurations">
   // https://hexo.io/docs/variables.html
   CONFIG.page = {
     sidebar: "",
-    isHome: true,
-    isPost: false,
+    isHome: false,
+    isPost: true,
     isPage: false,
     isArchive: false
   };
 </script>
 
-  <title>YJF❤️LY</title>
+  <title>Build blog with hexo and github pages | YJF❤️LY</title>
   
 
 
@@ -247,12 +249,13 @@
 
           <div id="content" class="content">
             
+
   <div id="posts" class="posts-expand">
-        <article itemscope itemtype="http://schema.org/Article">
+      <article itemscope itemtype="http://schema.org/Article">
   
   
   
-  <div class="post-block home">
+  <div class="post-block post">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/03/Build-blog-with-hexo-and-github-pages/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -265,9 +268,8 @@
       <meta itemprop="name" content="YJF❤️LY">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-            
-            <a href="/2019/10/03/Build-blog-with-hexo-and-github-pages/" class="post-title-link" itemprop="url">Build blog with hexo and github pages</a>
+        <h1 class="post-title" itemprop="name headline">Build blog with hexo and github pages
+
           
         </h1>
 
@@ -313,37 +315,53 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>自从读PhD以来，就想搭建一个属于自己的博客，记录一下博士生活。然而由于自己水平有限，简单研究过两下就放弃了。这次克服拖延症，在网上google一推教程，选定Hexo + github pages来搭建自己的博客。希望自己可以多多记录，好好学习，天天向上！在这里，简单记录一下博客的建立过程。
-          <!--noindex-->
-          
-            <div class="post-button">
-              <a class="btn" href="/2019/10/03/Build-blog-with-hexo-and-github-pages/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
+        <p>自从读PhD以来，就想搭建一个属于自己的博客，记录一下博士生活。然而由于自己水平有限，简单研究过两下就放弃了。这次克服拖延症，在网上google一推教程，选定Hexo + github pages来搭建自己的博客。希望自己可以多多记录，好好学习，天天向上！在这里，简单记录一下博客的建立过程。<a id="more"></a></p>
+<p>建立一个个人博客需要以下几个步骤：</p>
+<ul>
+<li>通过个人github账号，新建立个人的github pages(username.github.io)</li>
+<li>下载Node.js，安装github和部署<a href="https://hexo.io/zh-cn/docs/" target="_blank" rel="noopener">Hexo</a></li>
+<li>使用<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">Next</a>主题进行主题配置</li>
+</ul>
+<h2 id="github-pages"><a href="#github-pages" class="headerlink" title="github pages"></a>github pages</h2><p><a href="https://pages.github.com/" target="_blank" rel="noopener">github pages</a>是一个可以用来搭建个人网页的一个github个人仓库。</p>
+<h2 id="Node-js-github-and-Hexo"><a href="#Node-js-github-and-Hexo" class="headerlink" title="Node.js, github, and Hexo"></a>Node.js, github, and Hexo</h2><p>Hexo是一个十分简洁的博客框架，使用Markdown解析渲染文章，生成静态页面。首先安装Git和Node.js。Mac用户需要先安装Command Line Tools。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 安装Hexo</span><br><span class="line">$ npm install -g hexo-cli</span><br><span class="line"># 初始化</span><br><span class="line">$ hexo init</span><br><span class="line"># 查看效果 (localhost:4000)</span><br><span class="line">$ hexo g</span><br><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
+
+<p>接下去将Hexo部署到GithubPages上。打开创建的Hexo文件夹，找到_config.yml文件，修改如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https://github.com/YJFKD/yjfkd.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line"># 部署</span><br><span class="line">$ hexo g</span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
+
+<p>这样你的GithubPages就用Hexo部署成功啦！</p>
+<h2 id="Next-theme"><a href="#Next-theme" class="headerlink" title="Next theme"></a>Next theme</h2><p>Next是一款简介但功能强大的博客主题。首先下载Next主题之后再将原Hexo主题换成Next theme。详细操作参考：<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">Next</a>。通过Next，可以调整网页布局，加入头像，个性签名，文章字数统计等等。</p>
+
     </div>
 
     
     
     
-      <footer class="post-footer">
-          <div class="post-eof"></div>
         
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Coding/" rel="tag"># Coding</a>
+            
+          </div>
+        
+
+        
+
       </footer>
+    
   </div>
   
   
   
   </article>
 
-    
   </div>
-
-  
 
 
           </div>
@@ -360,6 +378,11 @@
 
   <aside class="sidebar">
     <div class="sidebar-inner">
+        
+        
+        
+        
+      
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
@@ -372,6 +395,8 @@
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#github-pages"><span class="nav-number">1.</span> <span class="nav-text">github pages</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Node-js-github-and-Hexo"><span class="nav-number">2.</span> <span class="nav-text">Node.js, github, and Hexo</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Next-theme"><span class="nav-number">3.</span> <span class="nav-text">Next theme</span></a></li></ol></div>
+        
       </div>
       <!--/noindex-->
 
@@ -492,12 +517,6 @@
 
   
 
-  
-    
-      
-        
-      
-    
   
     
       

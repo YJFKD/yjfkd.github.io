@@ -1,11 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Hexo draft generate]]></title>
+    <url>%2F2019%2F10%2F05%2FHexo-draft-generate%2F</url>
+    <content type="text"><![CDATA[编写草稿1$ hexo new draft 标题 生成md文件在source/_draft目录下，放在此文件夹下的草稿使用hexo g命令生成静态文件时，不会被生成。 预览草稿1$ hexo s --draft 在启用本地服务的时候，会渲染生成草稿。 发布草稿1$ hexo publish post 标题 此命令会将草稿发布到source/_post中，同时移除source/_draft中的草稿。 官方文档参考Hexo-编写和发布]]></content>
+      <tags>
+        <tag>Hexo</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Build blog with hexo and github pages]]></title>
     <url>%2F2019%2F10%2F03%2FBuild-blog-with-hexo-and-github-pages%2F</url>
     <content type="text"><![CDATA[自从读PhD以来，就想搭建一个属于自己的博客，记录一下博士生活。然而由于自己水平有限，简单研究过两下就放弃了。这次克服拖延症，在网上google一推教程，选定Hexo + github pages来搭建自己的博客。希望自己可以多多记录，好好学习，天天向上！在这里，简单记录一下博客的建立过程。 建立一个个人博客需要以下几个步骤： 通过个人github账号，新建立个人的github pages(username.github.io) 下载Node.js，安装github和部署Hexo 使用Next主题进行主题配置 github pagesgithub pages是一个可以用来搭建个人网页的一个github个人仓库。 Node.js, github, and HexoHexo是一个十分简洁的博客框架，使用Markdown解析渲染文章，生成静态页面。首先安装Git和Node.js。Mac用户需要先安装Command Line Tools。 1234567# 安装Hexo$ npm install -g hexo-cli# 初始化$ hexo init# 查看效果 (localhost:4000)$ hexo g$ hexo s 接下去将Hexo部署到GithubPages上。打开创建的Hexo文件夹，找到_config.yml文件，修改如下： 123456789# Deployment## Docs: https://hexo.io/docs/deployment.htmldeploy: type: git repository: https://github.com/YJFKD/yjfkd.github.io.git branch: master# 部署$ hexo g$ hexo d 这样你的GithubPages就用Hexo部署成功啦！ Next themeNext是一款简介但功能强大的博客主题。首先下载Next主题之后再将原Hexo主题换成Next theme。详细操作参考：Next。通过Next，可以调整网页布局，加入头像，个性签名，文章字数统计等等。]]></content>
       <tags>
-        <tag>Coding</tag>
+        <tag>Hexo</tag>
       </tags>
   </entry>
 </search>

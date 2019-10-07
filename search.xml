@@ -1,6 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Logistic Regression]]></title>
+    <url>%2F2019%2F10%2F07%2FLogistic-Regression%2F</url>
+    <content type="text"><![CDATA[Model introducationLogistic Regression是一个分类模型，而不是回归模型. Logistic Regression回归的本质是：假设数据服从某个分布，然后用极大似然估计去做参数的估计. Definition设 X 是连续随机变量， X 服从Logistic Regression是指 X 具有下列分布函数和密度函数：MATHJAX-SSR-0MATHJAX-SSR-1使用Python matplotlib以及Numpy生成logistic的概率分布函数和概率密度函数图像： 1234567891011121314151617181920212223# import packagesfrom matplotlib import pyplot as pltimport numpy as np# define parametersmu = 0gamma = 1x = np.linspace(-10,10,100)# define functiondef logistic(x): return np.exp(-(x-mu)/gamma)/(gamma * (1+np.exp(-(x-mu)/gamma))**2)def distribution(x): return 1/(1+np.exp(-(x-mu)/gamma))# plot figurey = logistic(x)z = distribution(x)plt.title('Probability density function')plt.plot(x,y)plt.title('prabability distribution function')plt.plot(x,z) 对于概率分布函数，如果 \gamma 值越小，曲线在中心附近增长越快. Binomial logistic regression model二项逻辑回归模型有如下的条件概率分布：MATHJAX-SSR-2MATHJAX-SSR-3输入 x \in \mathbf{R}^{n} ，输出 Y\in{0,1} , 参数 w\in \mathbf{R}^{n}, b \in \mathbf{R} , w \cdot x 是向量 w 和 x 的內积. 通过比较 P(Y=1|x) 和 P(Y=0|x) 大小，将 x 分类到概率大的那一类. Definition of Odds几率:MATHJAX-SSR-4所以，在逻辑回归中，输出 Y 的对数几率是输入 x 的线性函数，这就是Logistic Regression. 线性函数 w\cdot x 的值越接近正无穷， P(Y=1|x) 越接近1，反之，越接近0. Parameter Estimation给定已有的数据集 T=\{(x_{1},y_{1}), (x_{2},y_{2}), ..., (x_{n},y_{n}) \} , 其中 x_{i} \in \mathbf{R}, y_{i} \in \{0,1\} . 下面介绍使用极大似然估计法(MLE)进行参数估计. Maximum Likelihood EstimationMLE是一种参数估计方法，假设某事件满足某种概率分布，但是参数不知道，根据事件的结果推算出参数的取值. 一般来说，事件 A 发生的概率和某一未知参数 \theta 有关， \theta 不同，则事件 A 发生的概率 P(A|\theta) 也不同.一般认为当事件 A 发生时， \theta 的取值是使概率 P(A|\theta) 最大的那一个.MLE的一般过程： 写出似然函数 取对数，整理 求导 求解似然方程 似然函数为：MATHJAX-SSR-5 对数似然函数为： \begin{aligned} logL(\theta) &amp; = \sum_{i=1}^{N}[y_{i}log\pi(x_{i})+(1-y_{i})log(1-\pi(x_{i}))] \\\\ &amp; = \sum_{i=1}^{N}\bigg[y_{i}log\frac{\pi(x_{i})}{1-\pi(x_{i})}+log(1-\pi(x_{i})\bigg] \\\\ &amp; = \sum_{i=1}^{N} \big[ y_{i}(w \cdot x_{i} + b) - log(1+exp(w\cdot x_{i} + b))\big] \end{aligned} 求解下面的最优化问题, 得到 \theta 最优值(梯度下降法，拟牛顿法):MATHJAX-SSR-7 Multi-nominal logistic regression model逻辑回归同时也可以用于多分类模型，假设输出是 {1,2,...,K} , 相应的概率为:MATHJAX-SSR-8其中， x\in \mathbf{R}^{n+1}, w_{k}\in \mathbf{R}^{n+1} . 多元逻辑回归的参数估计方法和二元逻辑回归一样.]]></content>
+      <tags>
+        <tag>Machine Learning</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Hexo draft generate]]></title>
     <url>%2F2019%2F10%2F05%2FHexo-draft-generate%2F</url>
     <content type="text"><![CDATA[编写草稿1$ hexo new draft 标题 生成md文件在source/_draft目录下，放在此文件夹下的草稿使用hexo g命令生成静态文件时，不会被生成。 预览草稿1$ hexo s --draft 在启用本地服务的时候，会渲染生成草稿。 发布草稿1$ hexo publish post 标题 此命令会将草稿发布到source/_post中，同时移除source/_draft中的草稿。 官方文档参考Hexo-编写和发布]]></content>

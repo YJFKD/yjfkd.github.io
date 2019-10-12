@@ -1,0 +1,709 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="这篇文章主要是记录《统计学习基础》第二章感知机的学习过程。 Definition感知机(Perceptron)是二分类的线性分类模型(Linear classification Model)，感知机学习是训练出一个可以将输入数据进行线性分离的超平面:  f(x)=sign(w\cdot x+b)where $x\in \mathbf{R}^{n}, w\in \mathbf{R}^{n}$">
+<meta name="keywords" content="Machine Learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Perceptron">
+<meta property="og:url" content="http://yoursite.com/2019/10/12/Perceptron/index.html">
+<meta property="og:site_name" content="YJF❤️LY">
+<meta property="og:description" content="这篇文章主要是记录《统计学习基础》第二章感知机的学习过程。 Definition感知机(Perceptron)是二分类的线性分类模型(Linear classification Model)，感知机学习是训练出一个可以将输入数据进行线性分离的超平面:  f(x)=sign(w\cdot x+b)where $x\in \mathbf{R}^{n}, w\in \mathbf{R}^{n}$">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/10/12/Perceptron/distance.png">
+<meta property="og:updated_time" content="2019-10-12T13:04:24.996Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Perceptron">
+<meta name="twitter:description" content="这篇文章主要是记录《统计学习基础》第二章感知机的学习过程。 Definition感知机(Perceptron)是二分类的线性分类模型(Linear classification Model)，感知机学习是训练出一个可以将输入数据进行线性分离的超平面:  f(x)=sign(w\cdot x+b)where $x\in \mathbf{R}^{n}, w\in \mathbf{R}^{n}$">
+<meta name="twitter:image" content="http://yoursite.com/2019/10/12/Perceptron/distance.png">
+  <link rel="canonical" href="http://yoursite.com/2019/10/12/Perceptron/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Perceptron | YJF❤️LY</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YJF❤️LY</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="fa fa-search fa-fw"></i>Search</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/12/Perceptron/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jingfeng Yang">
+      <meta itemprop="description" content="Life is like a box of chocolates. You never know what you're gonna get.">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YJF❤️LY">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Perceptron
+
+          
+        </h1>
+
+        <div class="post-meta">
+	  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-10-12 21:04:24" itemprop="dateCreated datePublished" datetime="2019-10-12T21:04:24+08:00">2019-10-12</time>
+            </span>
+          
+
+          
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              
+              <span>5.6k</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>这篇文章主要是记录《统计学习基础》第二章感知机的学习过程。</p>
+<h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><p>感知机(Perceptron)是二分类的线性分类模型(Linear classification Model)，感知机学习是训练出一个可以将输入数据进行线性分离的超平面:</p>
+<script type="math/tex; mode=display">
+f(x)=sign(w\cdot x+b)</script><p>where $x\in \mathbf{R}^{n}, w\in \mathbf{R}^{n}$<br><a id="more"></a></p>
+<script type="math/tex; mode=display">
+sign(x)=
+\begin{cases}
++1, \quad x \ge0 \\\\
+-1, \quad x \lt0 
+\end{cases}</script><p>$sign$是感知机的激活函数，和Logistic Regression的激活函数$sigmod$不同。</p>
+<p>给定一个线性方程: $w\cdot x+b=0$, 对应于$\mathbf{R}^{n}$中的一个超平面。$w$是超平面的法向量, $b$是超平面的截距。</p>
+<h3 id="Distance-Calculation"><a href="#Distance-Calculation" class="headerlink" title="Distance Calculation"></a>Distance Calculation</h3><p>对于平面上的两点: $x_{1}, x_{2}$满足线性方程:</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+w\cdot x_{1}+b & =0 \\
+w\cdot x_{2}+b & =0 \\
+w(x_{1}-x_{2}) & =0 \\
+\end{aligned}</script><p>所以$w$是超平面的法向量。</p>
+<h2 id="Learning-Policy"><a href="#Learning-Policy" class="headerlink" title="Learning Policy"></a>Learning Policy</h2><p>给定一个数据集 $T=\{ (x_{1},y_{1}), (x_{2},y_{2}),…,(x_{n},y_{n}) \}$, 假设存在某个超平面$S$:</p>
+<script type="math/tex; mode=display">
+w\cdot x+b=0</script><p>可以将正实例和负实例点正确的划分到超平面的两侧: If $y_{i} = +1, \rightarrow w\cdot x+b \gt 0$ and $y_{i}=-1 \rightarrow w\cdot x+b \lt 0$. 则称数据集$T$是线性可分的(Linearly separable dataset)。</p>
+<h3 id="Loss-Objective"><a href="#Loss-Objective" class="headerlink" title="Loss Objective"></a>Loss Objective</h3><p>Loss Function定义为误分类点到超平面$S$的总距离。那么如何计算空间中的一点$x_{i}$到超平面$S$的距离呢？我们先考虑简单的三维情况: </p>
+<p><img src="distance.png" width="40%" height="20%"></p>
+<p>给定平面$S$上一点$P=[x_{0},y_{0},z_{0}]$, 空间内一点$Q=[x_{1},y_{1},z_{1}]$，法向量$n=[w_{1},w_{2},w_{3}]$, 有:</p>
+<script type="math/tex; mode=display">
+w_{1}x_{0} + w_{2}y_{0} + w_{3}z_{0} + b = 0</script><p>计算图中$Q$到平面$S$的距离:</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+D & = |PQ|\cos\theta \\
+  & = \frac{|n|}{|n|}|PQ|\cos\theta \\
+  & = \frac{\mathbf{PQ}\cdot\mathbf{n}}{|n|} \\
+  & = \frac{w_{1}(x_{1}-x_{0})+w_{2}(y_{1}-y_{0})+w_{3}(z_{1}-z_{0})}{\sqrt{x_{0}^2+y_{0}^2+z_{0}^2}} \\
+  & = \frac{|w_{1}x_{1}+w_{2}y_{1}+w_{3}z_{1}+b|}{\sqrt{x_{0}^2+y_{0}^2+z_{0}^2}}
+\end{aligned}</script><p>将三维情况推广到$n$维，对于任意一点$x_{0}\in \mathbf{R}^{n}$, 它到平面$S$的距离为:</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+D & = \frac{|w\cdot x_{0}+b|}{\sqrt{w_{1}+w_{2}+...+w_{n}}} \\
+& = \frac{|w\cdot x_{0}+b|}{\| w \|}
+\end{aligned}</script><p>这里$\|w\|$表示$w$的$L_{2}$范数。这里我们只关心分类错误的数据$(x_{i},y_{i})$, 我们有以下关系:</p>
+<script type="math/tex; mode=display">
+w\cdot x_{i}+b\gt0 \rightarrow y_{i}=-1\\
+w\cdot x_{i}+b\lt0 \rightarrow y_{i}=+1</script><p>所以:</p>
+<script type="math/tex; mode=display">
+-y_{i}(w\cdot x_{i}+b) \gt 0</script><p>对于错误分类点的集合$M$, 所有分类错误的点到超平面$S$的距离之和为:</p>
+<script type="math/tex; mode=display">
+-\frac{1}{\|w\|}\sum_{x_{i}\in M}y_{i}(w\cdot x_{i}+b)</script><p>进而，我们可以将损失函数写成:</p>
+<script type="math/tex; mode=display">
+L(w,b)=-\sum_{x_{i}\in M}y_{i}(w\cdot x_{i}+b)</script><p>如果没有误分类点，则$L(w,b)=0$, 否者$L(w,b)$一定是非负的。误分类点越少，$L(w,b)$越小。因此，我们的目标是找到合适的$w,b$值，使得$L(w,b)$尽可能等于0.</p>
+<h2 id="Learning-Algorithm"><a href="#Learning-Algorithm" class="headerlink" title="Learning Algorithm"></a>Learning Algorithm</h2><p>感知机采用随机梯度下降法(stochastic gradient descent)来进行优化。在进行算法迭代的过程中，随机选取误分类点进行梯度下降，直至没有误分类点。</p>
+<p>Loss Function的梯度为:</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\nabla_{w}L(w,b) & =-\sum_{x_{i}\in M}y_{i}x_{i} \\\\
+\nabla_{b}L(w,b) & =-\sum_{x_{i}\in M}y_{i}
+\end{aligned}</script><p>随机选取$(x_{i},y_{i})$，对$w,b$进行更新，其中$\eta(0\lt \eta \le 1)$为学习率(learning rate):</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+    w &\leftarrow w - \eta(-y_{i}x_{i}) \\\\
+    b &\leftarrow b - \eta(-y_{i})
+\end{aligned}</script><p>算法过程如下:</p>
+<ol>
+<li>输入: $(x_{1},y_{1}),…,(x_{n},y_{n})$，$\eta(0\lt\eta\le1)$，输出: $w,b,f(x)=sign(w\cdot x+b)$</li>
+<li>选取 $w_{0},b_{0}$</li>
+<li>随机选取数据 $(x_{i},y_{i})$</li>
+<li>如果 $y_{i}(w\cdot x_{i}+b)\le0$，更新$w,b$</li>
+<li>回到(2)，直至没有误分类点</li>
+</ol>
+<p>在上述算法中，步骤(2,3)是随机性的，因此，感知机在学习过程中如果采取不同的初值或是不同的误分类点进行$w,b$的更新，得到的超平面$S$是可以不同的。</p>
+<h3 id="Convergence-Analysis"><a href="#Convergence-Analysis" class="headerlink" title="Convergence Analysis"></a>Convergence Analysis</h3><p>对于一个线性可分的数据集，通过上述算法，是否一定可以得到一个分类完全正确的超平面 $S$ 呢？下面梳理一下Novikoff定理得证明过程。<br><strong>Novikoff</strong>: </p>
+<ol>
+<li>存在满足条件$\| w_{opt} \| = 1$的超平面$w_{opt}\cdot x+b_{opt}=0$将数据集完全正确分开；且存在$\gamma\gt0$，满足：$y_{i}(w_{opt}\cdot x_{i}+b_{opt})\ge\gamma$，对于$i=0,1,2,…,N$</li>
+<li>令$R=max\|x_{i}\|, i\in 1,2,…,N$，训练算法的迭代次数$k$满足:<script type="math/tex; mode=display">
+k\leq\bigg(\frac{R}{\gamma}\bigg)^2</script></li>
+</ol>
+<p>证明：</p>
+<script type="math/tex; mode=display">
+y_{i}(w_{opt}\cdot x_{i}+b_{opt})\gt0 \\
+\rightarrow \\
+\gamma = \min_{i}\big[y_{i}(w_{opt}\cdot x_{i}+b_{opt})] \\
+\rightarrow \\
+y_{i}(w_{opt}\cdot x_{i}+b_{opt})\ge\gamma</script><p>在选取第$k$个误分实例前，我们有:</p>
+<script type="math/tex; mode=display">
+\hat{w}_{k-1}=(w_{k-1},b_{k-1})</script><p>由于第$k$个实例是误分的，那么有：</p>
+<script type="math/tex; mode=display">
+y_{i}(\hat{w}_{k-1}\cdot \hat{x}_{i})=y_{i}(w_{k-1}\cdot x_{i}+b_{k-1})\le0</script><p>更新$w,b$:</p>
+<script type="math/tex; mode=display">
+\hat{w}_{k}=\hat{w}_{k-1}+\eta y_{i}x_{i}</script><p>然后同过不等式来得到迭代次数$k$上界。</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+\hat{w}_{k}\cdot\hat{w}_{opt}&=\hat{w}_{k-1}\cdot\hat{w}_{opt}+\eta y_{i}\hat{w}_{opt}\cdot x_{i} \\
+&\ge \hat{w}_{k-1}\cdot\hat{w}_{opt}+\eta\gamma
+\end{aligned}</script><p>通过上述公式我们可以递推得到以下两个不等式:</p>
+<script type="math/tex; mode=display">
+\hat{w}_{k}\cdot\hat{w}_{opt} \ge \hat{w}_{k-1}\cdot\hat{w}_{opt}+\eta\gamma\ge\hat{w}_{k-2}\cdot\hat{w}_{opt}+2\eta\gamma\ge...\ge\hat{w}_{0}\cdot\hat{w}_{opt}+k\eta\gamma  \tag{1}</script><script type="math/tex; mode=display">
+
+\begin{aligned}
+\| \hat{w}_{k} \|^{2} &= \| \hat{w}_{k-1} \|^{2} + 2\eta y_{i}\hat{w}_{k-1}\cdot\hat{x}_{i}+\eta^{2} y_{i}^{2}\|\hat{x}_{i}\|^{2} \\
+& \le \| \hat{w}_{k-1} \|^{2} + \eta^{2} y_{i}^{2}\|\hat{x}_{i}\|^{2} \\
+& \le \| \hat{w}_{k-1} \|^{2} + \eta^{2}y_{i}^{2}R^{2} \\
+& \le \| \hat{w}_{k-2} \|^{2} + 2\eta^{2}y_{i}^{2}R^{2} \\
+& \le k\eta^{2}y_{i}^{2}R^{2} = \eta^{2}R^{2} 
+\end{aligned} \tag{2}</script><p>联合$(1),(2)$可得：</p>
+<script type="math/tex; mode=display">
+k\eta\gamma \le \hat{w}_{k}\cdot \hat{w}_{opt} \le \| \hat{w}_{k} \| \| \hat{w}_{opt} \| \le \sqrt{k}\eta R \cdot 1 \\
+\Downarrow \\
+k^{2}\gamma^{2} \le kR^{2} \\
+\Downarrow \\
+k \le \bigg(\frac{R}{\gamma}\bigg)^{2}</script><p>得证，算法迭代次数$k$具有上界，所以算法是收敛的。如果数据集是不可分的，那么算法不会收敛，将产生震荡。感知机和支持向量机(SVM)的区别在于支持向量机对产生的超平面进行了约束，确保了只能产生唯一一个超平面，而感知机存在多个超平面，和算法中选取的$w,b$初值以及误分类点$(x_{i},y_{i})$的选择有关。</p>
+<h2 id="Dual-Form"><a href="#Dual-Form" class="headerlink" title="Dual Form"></a>Dual Form</h2><p>在原算法中，通过对$w,b$的更新，得到最终的最优值。$w,b$的更新公式如下:</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+w &\leftarrow w + \eta y_{i}x_{i} \\
+b &\leftarrow b + \eta y_{i}
+\end{aligned}</script><p>假设算法经过$n$次达到收敛，每次选择$(x_{i},y_{i})$进行参数更新时，$\Delta w=\eta y_{i}x_{i}, \Delta b = \eta y_{i}$。假设在算法收敛过程中，点$(x_{i},y_{i})$共被选择了$n_{i}$次，那么最终得到的$w,b$为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+w &= \sum_{i=1}^{N} n_{i}\eta y_{i}x_{i} \\
+b &= \sum_{i=1}^{N} n_{i}\eta y_{i}
+\end{aligned}</script><p>那么对偶形式下的感知机模型为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+f(x) &=sign(w\cdot x+b) \\
+&= sign(\sum_{i=1}^{N} n_{i}\eta y_{i}x_{i}\cdot x + \sum_{i=1}^{N} n_{i}\eta y_{i})
+\end{aligned}</script><p>算法步骤为：</p>
+<ol>
+<li>初始化$n_{i}=0, \forall i\in N$，$N$表示总的分类点数；</li>
+<li>随机选取数据$(x_{i},y_{i})$；</li>
+<li>如果$y_{i}(\sum_{i=1}^{N} n_{i}\eta y_{i}x_{i}\cdot x + \sum_{i=1}^{N} n_{i}\eta y_{i})\le 0$，$n_{i} = n_{i}+1$；</li>
+<li>到$(2)$，直到数据全部分类正确。</li>
+</ol>
+<p><strong>总结</strong>：对偶形式和原始形式的差别在于参数的更新，原始中我们迭代更新$w,b$，而在对偶形式中我们更新随机选择误分类点的次数$n_{i}$。对偶形式相对原始形式在某种情况下会有计算更快的优势。在原始形式中，每次迭代，需要计算$w\cdot x$的內积, 其中$w,x\in \mathbf{R}^{n}$，计算量为$n \times n$。而在对偶形式中，则需要计算$x_{i}\cdot x_{j}$，计算量为$N \times N$。因此在分类数据点维数$n$很大时，使用对偶形式可以减轻计算复杂度。</p>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>本片博文详细推导了感知机定义，目标函数，算法，以及对偶形式。其中涉及到了随机梯度下降法(SGD)，打算最近在学习复习下相应的优化算法。</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/10/07/Logistic-Regression/" rel="next" title="Logistic Regression">
+                  <i class="fa fa-chevron-left"></i> Logistic Regression
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Definition"><span class="nav-number">1.</span> <span class="nav-text">Definition</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Distance-Calculation"><span class="nav-number">1.1.</span> <span class="nav-text">Distance Calculation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Learning-Policy"><span class="nav-number">2.</span> <span class="nav-text">Learning Policy</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Loss-Objective"><span class="nav-number">2.1.</span> <span class="nav-text">Loss Objective</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Learning-Algorithm"><span class="nav-number">3.</span> <span class="nav-text">Learning Algorithm</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Convergence-Analysis"><span class="nav-number">3.1.</span> <span class="nav-text">Convergence Analysis</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Dual-Form"><span class="nav-number">4.</span> <span class="nav-text">Dual Form</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">5.</span> <span class="nav-text">Conclusion</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.png"
+      alt="Jingfeng Yang">
+  <p class="site-author-name" itemprop="name">Jingfeng Yang</p>
+  <div class="site-description" itemprop="description">Life is like a box of chocolates. You never know what you're gonna get.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">4</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liu Yue</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    
+    <span title="Symbols count total">9k</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
+<script src="/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.1"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+</body>
+</html>

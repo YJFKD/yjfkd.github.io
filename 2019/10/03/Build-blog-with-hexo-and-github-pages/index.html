@@ -331,12 +331,8 @@
 <li>使用<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">Next</a>主题进行主题配置</li>
 </ul>
 <h2 id="github-pages"><a href="#github-pages" class="headerlink" title="github pages"></a>github pages</h2><p><a href="https://pages.github.com/" target="_blank" rel="noopener">github pages</a>是一个可以用来搭建个人网页的一个github个人仓库。</p>
-<h2 id="Node-js-github-and-Hexo"><a href="#Node-js-github-and-Hexo" class="headerlink" title="Node.js, github, and Hexo"></a>Node.js, github, and Hexo</h2><p>Hexo是一个十分简洁的博客框架，使用Markdown解析渲染文章，生成静态页面。首先安装Git和Node.js。Mac用户需要先安装Command Line Tools。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 安装Hexo</span><br><span class="line">$ npm install -g hexo-cli</span><br><span class="line"># 初始化</span><br><span class="line">$ hexo init</span><br><span class="line"># 查看效果 (localhost:4000)</span><br><span class="line">$ hexo g</span><br><span class="line">$ hexo s</span><br></pre></td></tr></table></figure>
-
-<p>接下去将Hexo部署到GithubPages上。打开创建的Hexo文件夹，找到_config.yml文件，修改如下：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https://github.com/YJFKD/yjfkd.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line"># 部署</span><br><span class="line">$ hexo g</span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure>
-
+<h2 id="Node-js-github-and-Hexo"><a href="#Node-js-github-and-Hexo" class="headerlink" title="Node.js, github, and Hexo"></a>Node.js, github, and Hexo</h2><p>Hexo是一个十分简洁的博客框架，使用Markdown解析渲染文章，生成静态页面。首先安装Git和Node.js。Mac用户需要先安装Command Line Tools。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"># 安装Hexo</span><br><span class="line">$ npm install -g hexo-cli</span><br><span class="line"># 初始化</span><br><span class="line">$ hexo init</span><br><span class="line"># 查看效果 (localhost:4000)</span><br><span class="line">$ hexo g</span><br><span class="line">$ hexo s</span><br></pre></td></tr></table></figure></p>
+<p>接下去将Hexo部署到GithubPages上。打开创建的Hexo文件夹，找到_config.yml文件，修改如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"># Deployment</span><br><span class="line">## Docs: https://hexo.io/docs/deployment.html</span><br><span class="line">deploy:</span><br><span class="line">  type: git</span><br><span class="line">  repository: https://github.com/YJFKD/yjfkd.github.io.git</span><br><span class="line">  branch: master</span><br><span class="line"># 部署</span><br><span class="line">$ hexo g</span><br><span class="line">$ hexo d</span><br></pre></td></tr></table></figure></p>
 <p>这样你的GithubPages就用Hexo部署成功啦！</p>
 <h2 id="Next-theme"><a href="#Next-theme" class="headerlink" title="Next theme"></a>Next theme</h2><p>Next是一款简介但功能强大的博客主题。首先下载Next主题之后再将原Hexo主题换成Next theme。详细操作参考：<a href="http://theme-next.iissnan.com/getting-started.html" target="_blank" rel="noopener">Next</a>。通过Next，可以调整网页布局，加入头像，个性签名，文章字数统计等等。</p>
 
@@ -438,7 +434,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -451,7 +447,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">tags</span>
         </a>
       </div>
@@ -484,7 +480,7 @@
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
     
-    <span title="Symbols count total">4k</span>
+    <span title="Symbols count total">9k</span>
 </div>
 
         

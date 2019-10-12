@@ -65,7 +65,7 @@
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2019/10/07/Logistic-Regression/a1.JPG">
 <meta property="og:image" content="http://yoursite.com/2019/10/07/Logistic-Regression/PDF.png">
-<meta property="og:updated_time" content="2019-10-07T07:50:25.687Z">
+<meta property="og:updated_time" content="2019-10-09T03:15:38.417Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Logistic Regression">
 <meta name="twitter:description" content="Model introducationLogistic Regression是一个分类模型，而不是回归模型. Logistic Regression回归的本质是：假设数据服从某个分布，然后用极大似然估计去做参数的估计.">
@@ -288,11 +288,19 @@
                 
               
 
-              <time title="Created: 2019-10-07 15:24:36 / Modified: 15:50:25" itemprop="dateCreated datePublished" datetime="2019-10-07T15:24:36+08:00">2019-10-07</time>
+              <time title="Created: 2019-10-07 15:24:36" itemprop="dateCreated datePublished" datetime="2019-10-07T15:24:36+08:00">2019-10-07</time>
             </span>
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2019-10-09 11:15:38" itemprop="dateModified" datetime="2019-10-09T11:15:38+08:00">2019-10-09</time>
+              </span>
             
           
 
@@ -305,7 +313,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span>2.7k</span>
+              <span>2.6k</span>
             </span>
           
 
@@ -319,26 +327,44 @@
 
       
         <h2 id="Model-introducation"><a href="#Model-introducation" class="headerlink" title="Model introducation"></a>Model introducation</h2><p>Logistic Regression是一个分类模型，而不是回归模型. Logistic Regression回归的本质是：假设数据服从某个分布，然后用极大似然估计去做参数的估计.<a id="more"></a></p>
-<h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><p>设$X$是连续随机变量，$X$服从Logistic Regression是指$X$具有下列分布函数和密度函数：<br>$$F(x) = P(X \leq x) = \frac{1}{1+e^{-(x-\mu)/\gamma}}$$<br>$$<br>f(x) = F’(x) = \frac{e^{-(x-\mu)/\gamma}}{\gamma(1+e^{-(x-\mu)/\gamma})^2}<br>$$<br>使用<code>Python matplotlib</code>以及<code>Numpy</code>生成logistic的概率分布函数和概率密度函数图像：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># import packages</span></span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># define parameters</span></span><br><span class="line">mu = <span class="number">0</span></span><br><span class="line">gamma = <span class="number">1</span></span><br><span class="line">x = np.linspace(<span class="number">-10</span>,<span class="number">10</span>,<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># define function</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">logistic</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> np.exp(-(x-mu)/gamma)/(gamma * (<span class="number">1</span>+np.exp(-(x-mu)/gamma))**<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">distribution</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>/(<span class="number">1</span>+np.exp(-(x-mu)/gamma))</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot figure</span></span><br><span class="line">y = logistic(x)</span><br><span class="line">z = distribution(x)</span><br><span class="line">plt.title(<span class="string">'Probability density function'</span>)</span><br><span class="line">plt.plot(x,y)</span><br><span class="line">plt.title(<span class="string">'prabability distribution function'</span>)</span><br><span class="line">plt.plot(x,z)</span><br></pre></td></tr></table></figure>
-
+<h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><p>设$X$是连续随机变量，$X$服从Logistic Regression是指$X$具有下列分布函数和密度函数：</p>
+<script type="math/tex; mode=display">F(x) = P(X \leq x) = \frac{1}{1+e^{-(x-\mu)/\gamma}}</script><script type="math/tex; mode=display">
+f(x) = F'(x) = \frac{e^{-(x-\mu)/\gamma}}{\gamma(1+e^{-(x-\mu)/\gamma})^2}</script><p>使用<code>Python matplotlib</code>以及<code>Numpy</code>生成logistic的概率分布函数和概率密度函数图像：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># import packages</span></span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># define parameters</span></span><br><span class="line">mu = <span class="number">0</span></span><br><span class="line">gamma = <span class="number">1</span></span><br><span class="line">x = np.linspace(<span class="number">-10</span>,<span class="number">10</span>,<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># define function</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">logistic</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> np.exp(-(x-mu)/gamma)/(gamma * (<span class="number">1</span>+np.exp(-(x-mu)/gamma))**<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">distribution</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>/(<span class="number">1</span>+np.exp(-(x-mu)/gamma))</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot figure</span></span><br><span class="line">y = logistic(x)</span><br><span class="line">z = distribution(x)</span><br><span class="line">plt.title(<span class="string">'Probability density function'</span>)</span><br><span class="line">plt.plot(x,y)</span><br><span class="line">plt.title(<span class="string">'prabability distribution function'</span>)</span><br><span class="line">plt.plot(x,z)</span><br></pre></td></tr></table></figure></p>
 <img src="/2019/10/07/Logistic-Regression/a1.JPG" title="This is probability density function">
 <img src="/2019/10/07/Logistic-Regression/PDF.png" title="This is probability distribution function">
 <p>对于概率分布函数，如果$\gamma$值越小，曲线在中心附近增长越快.</p>
-<h2 id="Binomial-logistic-regression-model"><a href="#Binomial-logistic-regression-model" class="headerlink" title="Binomial logistic regression model"></a>Binomial logistic regression model</h2><p>二项逻辑回归模型有如下的条件概率分布：<br>$$P(Y=1|x) = \frac{exp(w \cdot x+b)}{1+exp(w \cdot x +b)}$$<br>$$P(Y=0|x) = \frac{1}{1+exp(w \cdot x+b)}$$<br>输入$x \in \mathbf{R}^{n}$，输出$Y\in{0,1}$, 参数$w\in \mathbf{R}^{n}, b \in \mathbf{R}$, $w \cdot x$是向量$w$和$x$的內积. 通过比较$P(Y=1|x)$和$P(Y=0|x)$大小，将$x$分类到概率大的那一类. </p>
-<h3 id="Definition-of-Odds"><a href="#Definition-of-Odds" class="headerlink" title="Definition of Odds"></a>Definition of Odds</h3><p><strong>几率</strong>:<br>$$<br>\begin{aligned}<br>&amp; odds = \frac{p}{1-p}\\<br>&amp; logit(p) = log\frac{p}{1-p}\\<br>&amp; log\frac{P(Y=1|x)}{1-P(Y=1|x)}=w \cdot x + b<br>\end{aligned}<br>$$<br>所以，在逻辑回归中，输出$Y$的对数几率是输入$x$的线性函数，这就是Logistic Regression. 线性函数$w\cdot x$的值越接近正无穷，$P(Y=1|x)$越接近1，反之，越接近0.</p>
-<h2 id="Parameter-Estimation"><a href="#Parameter-Estimation" class="headerlink" title="Parameter Estimation"></a>Parameter Estimation</h2><p>给定已有的数据集$T={(x_{1},y_{1}), (x_{2},y_{2}), …, (x_{n},y_{n}) }$, 其中$x_{i} \in \mathbf{R}, y_{i} \in {0,1}$. 下面介绍使用极大似然估计法(MLE)进行参数估计.</p>
-<h3 id="Maximum-Likelihood-Estimation"><a href="#Maximum-Likelihood-Estimation" class="headerlink" title="Maximum Likelihood Estimation"></a>Maximum Likelihood Estimation</h3><p>MLE是一种参数估计方法，假设某事件满足某种概率分布，但是参数不知道，根据事件的结果推算出参数的取值. 一般来说，事件$A$发生的概率和某一未知参数$\theta$有关，$\theta$不同，则事件$A$发生的概率$P(A|\theta)$也不同.一般认为当事件$A$发生时，$\theta$的取值是使概率$P(A|\theta)$最大的那一个.<br>MLE的一般过程：</p>
+<h2 id="Binomial-logistic-regression-model"><a href="#Binomial-logistic-regression-model" class="headerlink" title="Binomial logistic regression model"></a>Binomial logistic regression model</h2><p>二项逻辑回归模型有如下的条件概率分布：</p>
+<script type="math/tex; mode=display">P(Y=1|x) = \frac{exp(w \cdot x+b)}{1+exp(w \cdot x +b)}</script><script type="math/tex; mode=display">P(Y=0|x) = \frac{1}{1+exp(w \cdot x+b)}</script><p>输入$x \in \mathbf{R}^{n}$，输出$Y\in{0,1}$, 参数$w\in \mathbf{R}^{n}, b \in \mathbf{R}$, $w \cdot x$是向量$w$和$x$的內积. 通过比较$P(Y=1|x)$和$P(Y=0|x)$大小，将$x$分类到概率大的那一类. </p>
+<h3 id="Definition-of-Odds"><a href="#Definition-of-Odds" class="headerlink" title="Definition of Odds"></a>Definition of Odds</h3><p><strong>几率</strong>:</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+& odds = \frac{p}{1-p}\\
+& logit(p) = log\frac{p}{1-p}\\
+& log\frac{P(Y=1|x)}{1-P(Y=1|x)}=w \cdot x + b
+\end{aligned}</script><p>所以，在逻辑回归中，输出$Y$的对数几率是输入$x$的线性函数，这就是Logistic Regression. 线性函数$w\cdot x$的值越接近正无穷，$P(Y=1|x)$越接近1，反之，越接近0.</p>
+<h2 id="Parameter-Estimation"><a href="#Parameter-Estimation" class="headerlink" title="Parameter Estimation"></a>Parameter Estimation</h2><p>给定已有的数据集$T=\{(x_{1},y_{1}), (x_{2},y_{2}), …, (x_{n},y_{n}) \}$, 其中$x_{i} \in \mathbf{R}, y_{i} \in \{0,1\}$. 下面介绍使用极大似然估计法(MLE)进行参数估计.</p>
+<h3 id="Maximum-Likelihood-Estimation"><a href="#Maximum-Likelihood-Estimation" class="headerlink" title="Maximum Likelihood Estimation"></a>Maximum Likelihood Estimation</h3><p>MLE是一种参数估计方法，假设某事件满足某种概率分布，但是参数不知道，根据事件的结果推算出参数的取值. 一般来说，事件$A$发生的概率和某一未知参数$\theta$有关，$\theta$不同，则事件$A$发生的概率$P(A|\theta)$也不同.一般认为当事件$A$发生时，$\theta$的取值是使概率$P(A|\theta)$最大的那一个.\<br>MLE的一般过程：</p>
 <ul>
 <li>写出似然函数</li>
 <li>取对数，整理</li>
 <li>求导</li>
 <li>求解似然方程 </li>
 </ul>
-<p>似然函数为：<br>$$<br>\begin{aligned}<br>L(\theta) &amp; = f(x_{1}|\theta)f(x_{2}|\theta)\cdot\cdot\cdot f(x_{n}|\theta) \\<br>&amp; = \prod_{i=1}^{N}[\pi(x_{i})]^{y_{i}}[1-\pi(x_{i})]^{1-y_{i}}<br>\end{aligned}<br>$$</p>
-<p>对数似然函数为：</p>
-<p>$$<br>\begin{aligned}<br>logL(\theta) &amp; = \sum_{i=1}^{N}[y_{i}log\pi(x_{i})+(1-y_{i})log(1-\pi(x_{i}))] \\<br>&amp; = \sum_{i=1}^{N}\bigg[y_{i}log\frac{\pi(x_{i})}{1-\pi(x_{i})}+log(1-\pi(x_{i})\bigg] \\<br>&amp; = \sum_{i=1}^{N} \big[ y_{i}(w \cdot x_{i} + b) - log(1+exp(w\cdot x_{i} + b))\big]<br>\end{aligned}<br>$$<br>求解下面的最优化问题, 得到$\theta$最优值(梯度下降法，拟牛顿法):<br>$$max \{ logL(\theta) \}$$</p>
-<h2 id="Multi-nominal-logistic-regression-model"><a href="#Multi-nominal-logistic-regression-model" class="headerlink" title="Multi-nominal logistic regression model"></a>Multi-nominal logistic regression model</h2><p>逻辑回归同时也可以用于多分类模型，假设输出是${1,2,…,K}$, 相应的概率为:<br>$$<br>P(Y=k|x)=\frac{exp(w_{k}\cdot x)}{1+\sum_{k=1}^{K-1}exp(w_{k}\cdot x)}, \quad k=1,2,…,K-1<br>$$<br>其中，$x\in \mathbf{R}^{n+1}, w_{k}\in \mathbf{R}^{n+1}$. 多元逻辑回归的参数估计方法和二元逻辑回归一样.</p>
+<p>似然函数为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+L(\theta) & = f(x_{1}|\theta)f(x_{2}|\theta)\cdot\cdot\cdot f(x_{n}|\theta) \\
+& = \prod_{i=1}^{N}[\pi(x_{i})]^{y_{i}}[1-\pi(x_{i})]^{1-y_{i}}
+\end{aligned}</script><p>对数似然函数为：</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+logL(\theta) & = \sum_{i=1}^{N}[y_{i}log\pi(x_{i})+(1-y_{i})log(1-\pi(x_{i}))] \\
+& = \sum_{i=1}^{N}\bigg[y_{i}log\frac{\pi(x_{i})}{1-\pi(x_{i})}+log(1-\pi(x_{i})\bigg] \\
+& = \sum_{i=1}^{N} \big[ y_{i}(w \cdot x_{i} + b) - log(1+exp(w\cdot x_{i} + b))\big]
+\end{aligned}</script><p>求解下面的最优化问题, 得到$\theta$最优值(梯度下降法，拟牛顿法): </p>
+<script type="math/tex; mode=display">max \{ logL(\theta) \}</script><h2 id="Multi-nominal-logistic-regression-model"><a href="#Multi-nominal-logistic-regression-model" class="headerlink" title="Multi-nominal logistic regression model"></a>Multi-nominal logistic regression model</h2><p>逻辑回归同时也可以用于多分类模型，假设输出是${1,2,…,K}$, 相应的概率为:</p>
+<script type="math/tex; mode=display">
+P(Y=k|x)=\frac{exp(w_{k}\cdot x)}{1+\sum_{k=1}^{K-1}exp(w_{k}\cdot x)}, \quad k=1,2,...,K-1</script><p>其中，$x\in \mathbf{R}^{n+1}, w_{k}\in \mathbf{R}^{n+1}$. 多元逻辑回归的参数估计方法和二元逻辑回归一样.</p>
 
     </div>
 
@@ -373,6 +399,10 @@
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
+              
+                <a href="/2019/10/12/Perceptron/" rel="prev" title="Perceptron">
+                  Perceptron <i class="fa fa-chevron-right"></i>
+                </a>
               
             </div>
           </div>
@@ -438,7 +468,7 @@
         
           <a href="/archives/">
         
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -451,7 +481,7 @@
             <a href="/tags/">
           
         
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">tags</span>
         </a>
       </div>
@@ -484,7 +514,7 @@
     </span>
       <span class="post-meta-item-text">Symbols count total: </span>
     
-    <span title="Symbols count total">4k</span>
+    <span title="Symbols count total">9k</span>
 </div>
 
         

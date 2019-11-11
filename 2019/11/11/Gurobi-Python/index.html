@@ -1,0 +1,805 @@
+<!DOCTYPE html>
+
+
+
+
+
+<html lang="zh-Hans">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 3.9.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.4.1" color="#222">
+
+<link rel="stylesheet" href="/css/main.css?v=7.4.1">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '7.4.1',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    translation: {
+      copy_button: 'Copy',
+      copy_success: 'Copied',
+      copy_failure: 'Copy failed'
+    },
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="Gurobi is one of the most powerful mathematical optimization solver. Here I introduce an planning optimization model first, and try to model it with python and gurobi python package.">
+<meta name="keywords" content="Gurobi,Optimization">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Gurobi Modeling with Python">
+<meta property="og:url" content="http://yoursite.com/2019/11/11/Gurobi-Python/index.html">
+<meta property="og:site_name" content="YJF❤️LY">
+<meta property="og:description" content="Gurobi is one of the most powerful mathematical optimization solver. Here I introduce an planning optimization model first, and try to model it with python and gurobi python package.">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2019/11/11/Gurobi-Python/Fig1.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/11/Gurobi-Python/Fig2.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/11/Gurobi-Python/Fig3.png">
+<meta property="og:image" content="http://yoursite.com/2019/11/11/Gurobi-Python/Fig4.png">
+<meta property="og:updated_time" content="2019-11-11T08:05:08.209Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Gurobi Modeling with Python">
+<meta name="twitter:description" content="Gurobi is one of the most powerful mathematical optimization solver. Here I introduce an planning optimization model first, and try to model it with python and gurobi python package.">
+<meta name="twitter:image" content="http://yoursite.com/2019/11/11/Gurobi-Python/Fig1.png">
+  <link rel="canonical" href="http://yoursite.com/2019/11/11/Gurobi-Python/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>Gurobi Modeling with Python | YJF❤️LY</title>
+  
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">YJF❤️LY</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+      
+      
+      
+        
+        <li class="menu-item menu-item-home">
+      
+    
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-about">
+      
+    
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-tags">
+      
+    
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-categories">
+      
+    
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+
+  </li>
+      
+      
+      
+        
+        <li class="menu-item menu-item-archives">
+      
+    
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a href="javascript:;" class="popup-trigger">
+        
+          <i class="fa fa-search fa-fw"></i>Search</a>
+      </li>
+    
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="Searching..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+            
+
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+      <article itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block post">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/11/11/Gurobi-Python/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Jingfeng Yang">
+      <meta itemprop="description" content="Life is like a box of chocolates. You never know what you're gonna get.">
+      <meta itemprop="image" content="/images/avatar.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="YJF❤️LY">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">Gurobi Modeling with Python
+
+          
+        </h1>
+
+        <div class="post-meta">
+	  
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              
+                
+              
+
+              <time title="Created: 2019-11-11 16:05:08" itemprop="dateCreated datePublished" datetime="2019-11-11T16:05:08+08:00">2019-11-11</time>
+            </span>
+          
+
+          
+          
+            <span class="post-meta-item" title="Symbols count in article">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              
+              <span>7.7k</span>
+            </span>
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Gurobi is one of the most powerful mathematical optimization solver. Here I introduce an planning optimization model first, and try to model it with python and gurobi python package. <a id="more"></a></p>
+<h2 id="Planning-Model"><a href="#Planning-Model" class="headerlink" title="Planning Model"></a>Planning Model</h2><p>There are 7 products want to be made by a factory, and each produces need to use a range of machines. The factory have 4 grinders, 2 vertical drills, 3 horizontal drills, 1 borer, and 1 planer.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Time</th>
+<th style="text-align:center">P1</th>
+<th style="text-align:center">P2</th>
+<th style="text-align:center">P3</th>
+<th style="text-align:center">P4</th>
+<th style="text-align:center">P5</th>
+<th style="text-align:center">P6</th>
+<th style="text-align:center">P7</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Profit</td>
+<td style="text-align:center">10</td>
+<td style="text-align:center">6</td>
+<td style="text-align:center">8</td>
+<td style="text-align:center">4</td>
+<td style="text-align:center">16</td>
+<td style="text-align:center">9</td>
+<td style="text-align:center">3</td>
+</tr>
+<tr>
+<td style="text-align:center">Grinding</td>
+<td style="text-align:center">0.5</td>
+<td style="text-align:center">0.7</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">0.3</td>
+<td style="text-align:center">0.2</td>
+<td style="text-align:center">0.5</td>
+</tr>
+<tr>
+<td style="text-align:center">V drilling</td>
+<td style="text-align:center">0.1</td>
+<td style="text-align:center">0.2</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">0.3</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">0.6</td>
+<td style="text-align:center">-</td>
+</tr>
+<tr>
+<td style="text-align:center">H drilling</td>
+<td style="text-align:center">0.2</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">0.8</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">0.6</td>
+</tr>
+<tr>
+<td style="text-align:center">Boring</td>
+<td style="text-align:center">0.05</td>
+<td style="text-align:center">0.03</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">0.07</td>
+<td style="text-align:center">0.1</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">0.08</td>
+</tr>
+<tr>
+<td style="text-align:center">Planing</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">0.01</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">0.05</td>
+<td style="text-align:center">-</td>
+<td style="text-align:center">0.05</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>According to this table, product 1 contribute 10 $ to profit, and it need manufacturing time on grinding is 0.5 hours, 0.1 hours in vertical drilling, 0.2 hours on horizon drilling, and 0.05 hours in boring. Machines also scheduled for maintenance. See as follows.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Month</th>
+<th style="text-align:center">Machine</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Jan</td>
+<td style="text-align:center">One Grinder</td>
+</tr>
+<tr>
+<td style="text-align:center">Feb</td>
+<td style="text-align:center">Two H Drillers</td>
+</tr>
+<tr>
+<td style="text-align:center">Mar</td>
+<td style="text-align:center">One Borer</td>
+</tr>
+<tr>
+<td style="text-align:center">Apr</td>
+<td style="text-align:center">One V Drill</td>
+</tr>
+<tr>
+<td style="text-align:center">May</td>
+<td style="text-align:center">One Grinder + One V Drill</td>
+</tr>
+<tr>
+<td style="text-align:center">June</td>
+<td style="text-align:center">One H Drill</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>Besides, there have limitations to how many of each product can be sold in a given month. At the Jan, there is no product inventory, but at June, there should be 50 units of each products in inventory.</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Month</th>
+<th style="text-align:center">P1</th>
+<th style="text-align:center">P2</th>
+<th style="text-align:center">P3</th>
+<th style="text-align:center">P4</th>
+<th style="text-align:center">P5</th>
+<th style="text-align:center">P6</th>
+<th style="text-align:center">P7</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">Jan</td>
+<td style="text-align:center">500</td>
+<td style="text-align:center">1000</td>
+<td style="text-align:center">300</td>
+<td style="text-align:center">300</td>
+<td style="text-align:center">800</td>
+<td style="text-align:center">200</td>
+<td style="text-align:center">100</td>
+</tr>
+<tr>
+<td style="text-align:center">Feb</td>
+<td style="text-align:center">600</td>
+<td style="text-align:center">500</td>
+<td style="text-align:center">200</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">400</td>
+<td style="text-align:center">300</td>
+<td style="text-align:center">150</td>
+</tr>
+<tr>
+<td style="text-align:center">Mar</td>
+<td style="text-align:center">300</td>
+<td style="text-align:center">600</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">500</td>
+<td style="text-align:center">400</td>
+<td style="text-align:center">100</td>
+</tr>
+<tr>
+<td style="text-align:center">Apr</td>
+<td style="text-align:center">200</td>
+<td style="text-align:center">300</td>
+<td style="text-align:center">400</td>
+<td style="text-align:center">500</td>
+<td style="text-align:center">200</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">100</td>
+</tr>
+<tr>
+<td style="text-align:center">May</td>
+<td style="text-align:center">0</td>
+<td style="text-align:center">100</td>
+<td style="text-align:center">500</td>
+<td style="text-align:center">100</td>
+<td style="text-align:center">1000</td>
+<td style="text-align:center">300</td>
+<td style="text-align:center">0</td>
+</tr>
+<tr>
+<td style="text-align:center">June</td>
+<td style="text-align:center">500</td>
+<td style="text-align:center">500</td>
+<td style="text-align:center">100</td>
+<td style="text-align:center">300</td>
+<td style="text-align:center">1100</td>
+<td style="text-align:center">500</td>
+<td style="text-align:center">60</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h2 id="Mathematical-Modeling"><a href="#Mathematical-Modeling" class="headerlink" title="Mathematical Modeling"></a>Mathematical Modeling</h2><h3 id="Sets"><a href="#Sets" class="headerlink" title="Sets"></a>Sets</h3><p>$T:$ Set of monthes, $t_{0}$ is the first month, and $t_{e}$ is the last month.<br>$P:$ Set of products.<br>$M:$ Set of machines.</p>
+<h3 id="Parameters"><a href="#Parameters" class="headerlink" title="Parameters"></a>Parameters</h3><p>$f_{pm}:$ Hours given to product $p$ manufactured on machine $m$.<br>$l_{tp}:$ Upper bound on sales for each product $p$ in month $t$.<br>$k_{p}:$ Profit for each product $p$.<br>$q_{tm}:$ Number of avaiable machines $m$ in month $t$.<br>$g:$ Machine can work $g$ hours per month.<br>$r:$ Store cost.<br>$z:$ Store capacity.</p>
+<h3 id="Varibales"><a href="#Varibales" class="headerlink" title="Varibales"></a>Varibales</h3><p>$b_{tp}:$ Number of product $p$ produced in month $t$.<br>$u_{tp}:$ Number of product $p$ selled in month $t$.<br>$s_{tp}:$ Number of product $p$ stored in month $t$.</p>
+<h3 id="Objective-Function"><a href="#Objective-Function" class="headerlink" title="Objective Function"></a>Objective Function</h3><script type="math/tex; mode=display">max \sum_{t \in T}\sum_{p \in P} \big( k_{p}u_{tp} - rs_{tp}\big)</script><h3 id="Constraints"><a href="#Constraints" class="headerlink" title="Constraints"></a>Constraints</h3><script type="math/tex; mode=display">
+\begin{aligned}
+s_{(t-1)p} + b_{tp} & = u_{tp} + s_{tp} \\
+b_{t_{0}} & = u_{t_{0}p} + s_{t_{0}p} \\
+s_{t_{e}p} & = z\\
+s_{tp} & \leq z\\
+\sum_{p \in P} f_{pm}b_{tp} &\leq g \cdot q_{tm}
+\end{aligned}</script><p>The last constraint ensures that <strong>per month the time all products needs on a certain kind of machines</strong> is lower or equal than the <strong>available hours for that machine in that month</strong> multiplied by the number of available machines in that month.</p>
+<h2 id="Gurobi-Python-Modeling"><a href="#Gurobi-Python-Modeling" class="headerlink" title="Gurobi Python Modeling"></a>Gurobi Python Modeling</h2><h3 id="Basic-Gurobi-Concepts"><a href="#Basic-Gurobi-Concepts" class="headerlink" title="Basic Gurobi Concepts"></a>Basic Gurobi Concepts</h3><p><img src="Fig1.png" width="40%" height="20%"></p>
+<p><strong>Parameters</strong> control the operations of Gurobi solver, for example, the optimizaiton running time. <strong>Attributes</strong> are primary machanism for querying and modifying properties of a Gurobi model, you can set the variable name by <code>variable.VarName = &#39;Cost&#39;</code>. <strong>Environments</strong> are the container for models and global parameters settings. </p>
+<p><img src="Fig2.png" width="40%" height="20%"></p>
+<p>When we build a model with Gurobi Python API, the whole process is as follows: </p>
+<p><img src="Fig3.png" width="80%" height="50%"></p>
+<p>The Gurobi Python API support linear and quadratic experssion. Here we give a toy example of solving optimization problem use Gurobi Python API.</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+max \qquad & x+y+2z \\
+s.t.\qquad & x+2y+3z \leq 4 \\
+           & x+y \geq 1 \\
+           &x,y,z \in {0,1}
+\end{aligned}</script><p>The Python code:<br><img src="Fig4.png" width="50%" height="30%"></p>
+<h2 id="Solve-The-Planning-Model"><a href="#Solve-The-Planning-Model" class="headerlink" title="Solve The Planning Model"></a>Solve The Planning Model</h2><p>Here we give the Python code: </p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Data </span></span><br><span class="line"><span class="keyword">from</span> gurobipy <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line"><span class="comment"># Data</span></span><br><span class="line">products = [<span class="string">"Prod1"</span>, <span class="string">"Prod2"</span>, <span class="string">"Prod3"</span>, <span class="string">"Prod4"</span>, <span class="string">"Prod5"</span>, <span class="string">"Prod6"</span>, <span class="string">"Prod7"</span>]</span><br><span class="line">months = [<span class="string">"Jan"</span>, <span class="string">"Feb"</span>, <span class="string">"Mar"</span>, <span class="string">"Apr"</span>, <span class="string">"May"</span>, <span class="string">"Jun"</span>]</span><br><span class="line">machines = [<span class="string">"grinder"</span>, <span class="string">"vertDrill"</span>, <span class="string">"horiDrill"</span>, <span class="string">"borer"</span>, <span class="string">"planer"</span>]</span><br><span class="line"></span><br><span class="line">profit = &#123; <span class="string">"Prod1"</span>: <span class="number">10</span>, <span class="string">"Prod2"</span>: <span class="number">6</span>, <span class="string">"Prod3"</span>: <span class="number">8</span>, <span class="string">"Prod4"</span>: <span class="number">4</span>, <span class="string">"Prod5"</span>: <span class="number">11</span>, <span class="string">"Prod6"</span>: <span class="number">9</span>, <span class="string">"Prod7"</span>: <span class="number">3</span>&#125;</span><br><span class="line">qMachine = &#123; <span class="string">"grinder"</span> : <span class="number">4</span>, <span class="string">"vertDrill"</span> : <span class="number">2</span>, <span class="string">"horiDrill"</span> : <span class="number">3</span>, <span class="string">"borer"</span> : <span class="number">1</span>, <span class="string">"planer"</span> : <span class="number">1</span>&#125;</span><br><span class="line"></span><br><span class="line">time_table = &#123;</span><br><span class="line">    <span class="string">"grinder"</span>: &#123;<span class="string">"Prod1"</span>: <span class="number">0.5</span>, <span class="string">"Prod2"</span>: <span class="number">0.7</span>, <span class="string">"Prod5"</span>: <span class="number">0.3</span>, <span class="string">"Prod6"</span>: <span class="number">0.2</span>, <span class="string">"Prod7"</span>: <span class="number">0.5</span> &#125;,</span><br><span class="line">    <span class="string">"vertDrill"</span>: &#123;<span class="string">"Prod1"</span>: <span class="number">0.1</span>, <span class="string">"Prod2"</span>: <span class="number">0.2</span>, <span class="string">"Prod4"</span>: <span class="number">0.3</span>, <span class="string">"Prod6"</span>: <span class="number">0.6</span> &#125;,</span><br><span class="line">    <span class="string">"horiDrill"</span>: &#123;<span class="string">"Prod1"</span>: <span class="number">0.2</span>, <span class="string">"Prod3"</span>: <span class="number">0.8</span>, <span class="string">"Prod7"</span>: <span class="number">0.6</span> &#125;,</span><br><span class="line">    <span class="string">"borer"</span>: &#123;<span class="string">"Prod1"</span>: <span class="number">0.05</span>,<span class="string">"Prod2"</span>: <span class="number">0.03</span>,<span class="string">"Prod4"</span>: <span class="number">0.07</span>, <span class="string">"Prod5"</span>: <span class="number">0.1</span>, <span class="string">"Prod7"</span>: <span class="number">0.08</span> &#125;,</span><br><span class="line">    <span class="string">"planer"</span>: &#123;<span class="string">"Prod3"</span>: <span class="number">0.01</span>,<span class="string">"Prod5"</span>: <span class="number">0.05</span>,<span class="string">"Prod7"</span>: <span class="number">0.05</span> &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">down = &#123;(<span class="string">"Jan"</span>,<span class="string">"grinder"</span>)   : <span class="number">1</span>, (<span class="string">"Feb"</span>, <span class="string">"horiDrill"</span>): <span class="number">2</span>, (<span class="string">"Mar"</span>, <span class="string">"borer"</span>)    : <span class="number">1</span>,</span><br><span class="line">        (<span class="string">"Apr"</span>, <span class="string">"vertDrill"</span>): <span class="number">1</span>, (<span class="string">"May"</span>, <span class="string">"grinder"</span>)  : <span class="number">1</span>, (<span class="string">"May"</span>, <span class="string">"vertDrill"</span>): <span class="number">1</span>,</span><br><span class="line">        (<span class="string">"Jun"</span>, <span class="string">"planer"</span>)   : <span class="number">1</span>, (<span class="string">"Jun"</span>, <span class="string">"horiDrill"</span>): <span class="number">1</span></span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">upper_dict = &#123; </span><br><span class="line">  <span class="string">"Jan"</span> : &#123; <span class="string">"Prod1"</span> : <span class="number">500</span>, <span class="string">"Prod2"</span> : <span class="number">1000</span>, <span class="string">"Prod3"</span> : <span class="number">300</span>, <span class="string">"Prod4"</span> : <span class="number">300</span>, <span class="string">"Prod5"</span> :  <span class="number">800</span>, <span class="string">"Prod6"</span> : <span class="number">200</span>, <span class="string">"Prod7"</span> : <span class="number">100</span> &#125;,</span><br><span class="line">  <span class="string">"Feb"</span> : &#123; <span class="string">"Prod1"</span> : <span class="number">600</span>, <span class="string">"Prod2"</span> :  <span class="number">500</span>, <span class="string">"Prod3"</span> : <span class="number">200</span>, <span class="string">"Prod4"</span> :   <span class="number">0</span>, <span class="string">"Prod5"</span> :  <span class="number">400</span>, <span class="string">"Prod6"</span> : <span class="number">300</span>, <span class="string">"Prod7"</span> : <span class="number">150</span> &#125;,</span><br><span class="line">  <span class="string">"Mar"</span> : &#123; <span class="string">"Prod1"</span> : <span class="number">300</span>, <span class="string">"Prod2"</span> :  <span class="number">600</span>, <span class="string">"Prod3"</span> :   <span class="number">0</span>, <span class="string">"Prod4"</span> :   <span class="number">0</span>, <span class="string">"Prod5"</span> :  <span class="number">500</span>, <span class="string">"Prod6"</span> : <span class="number">400</span>, <span class="string">"Prod7"</span> : <span class="number">100</span> &#125;,</span><br><span class="line">  <span class="string">"Apr"</span> : &#123; <span class="string">"Prod1"</span> : <span class="number">200</span>, <span class="string">"Prod2"</span> :  <span class="number">300</span>, <span class="string">"Prod3"</span> : <span class="number">400</span>, <span class="string">"Prod4"</span> : <span class="number">500</span>, <span class="string">"Prod5"</span> :  <span class="number">200</span>, <span class="string">"Prod6"</span> :   <span class="number">0</span>, <span class="string">"Prod7"</span> : <span class="number">100</span> &#125;,</span><br><span class="line">  <span class="string">"May"</span> : &#123; <span class="string">"Prod1"</span> :   <span class="number">0</span>, <span class="string">"Prod2"</span> :  <span class="number">100</span>, <span class="string">"Prod3"</span> : <span class="number">500</span>, <span class="string">"Prod4"</span> : <span class="number">100</span>, <span class="string">"Prod5"</span> : <span class="number">1000</span>, <span class="string">"Prod6"</span> : <span class="number">300</span>, <span class="string">"Prod7"</span> :   <span class="number">0</span> &#125;,</span><br><span class="line">  <span class="string">"Jun"</span> : &#123; <span class="string">"Prod1"</span> : <span class="number">500</span>, <span class="string">"Prod2"</span> :  <span class="number">500</span>, <span class="string">"Prod3"</span> : <span class="number">100</span>, <span class="string">"Prod4"</span> : <span class="number">300</span>, <span class="string">"Prod5"</span> : <span class="number">1100</span>, <span class="string">"Prod6"</span> : <span class="number">500</span>, <span class="string">"Prod7"</span> :  <span class="number">60</span> &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">upper = &#123; (month, product) : upper_dict[month][product] <span class="keyword">for</span> month <span class="keyword">in</span> months <span class="keyword">for</span> product <span class="keyword">in</span> products &#125;</span><br><span class="line"></span><br><span class="line">storeCost = <span class="number">0.5</span></span><br><span class="line">storeCapacity = <span class="number">100</span></span><br><span class="line">endStock = <span class="number">50</span></span><br><span class="line">hoursPerMonth = <span class="number">2</span>*<span class="number">8</span>*<span class="number">24</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Gurobi Modeling</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># build a model</span></span><br><span class="line">model = Model(<span class="string">"Factory Planning"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># decision varibales</span></span><br><span class="line">manu = model.addVars(months, products, name=<span class="string">"manu"</span>)</span><br><span class="line">held = model.addVars(months, products, name=<span class="string">"held"</span>, ub = storeCapacity)</span><br><span class="line">sell = model.addVars(months, products, name=<span class="string">"sell"</span>, ub = upper)</span><br><span class="line"></span><br><span class="line"><span class="comment"># constraints</span></span><br><span class="line">model.addConstrs((manu[months[<span class="number">0</span>], product] == sell[months[<span class="number">0</span>], product] + held[months[<span class="number">0</span>], product] </span><br><span class="line">                    <span class="keyword">for</span> product <span class="keyword">in</span> products), </span><br><span class="line">                    name=<span class="string">"balance"</span>)</span><br><span class="line">model.addConstrs((held[months[month_index<span class="number">-1</span>],product] + manu[month, product] == sell[month, product] + held[month, product]</span><br><span class="line">                    <span class="keyword">for</span> product <span class="keyword">in</span> products <span class="keyword">for</span> month_index, month <span class="keyword">in</span> enumerate(months) <span class="keyword">if</span> month != months[<span class="number">0</span>]),</span><br><span class="line">                    name=<span class="string">'balance'</span>)</span><br><span class="line">model.addConstrs((held[months[<span class="number">-1</span>], product] == endStock</span><br><span class="line">                    <span class="keyword">for</span> product <span class="keyword">in</span> products),</span><br><span class="line">                    name=<span class="string">'End_Balance'</span>)</span><br><span class="line">model.addConstrs((held[month, product] &lt;= endStock</span><br><span class="line">                    <span class="keyword">for</span> month <span class="keyword">in</span> months <span class="keyword">for</span> product <span class="keyword">in</span> products),</span><br><span class="line">                    name=<span class="string">'Capacity'</span>)</span><br><span class="line">model.addConstrs(((quicksum(time_table[machine][product] * manu[month,product]</span><br><span class="line">                    <span class="keyword">for</span> product <span class="keyword">in</span> time_table[machine]) &lt;= hoursPerMonth * qMachine[machine])</span><br><span class="line">                    <span class="keyword">for</span> machine <span class="keyword">in</span> machines <span class="keyword">for</span> month <span class="keyword">in</span> months</span><br><span class="line">                    <span class="keyword">if</span> (month, machine) <span class="keyword">in</span> down),</span><br><span class="line">                    name=<span class="string">'Capacity'</span>)</span><br><span class="line">model.addConstrs((quicksum(time_table[machine][product] * manu[month, product] </span><br><span class="line">                    <span class="keyword">for</span> product <span class="keyword">in</span> time_table[machine]) &lt;= hoursPerMonth * qMachine[machine] </span><br><span class="line">                    <span class="keyword">for</span> machine <span class="keyword">in</span> machines <span class="keyword">for</span> month <span class="keyword">in</span> months </span><br><span class="line">                    <span class="keyword">if</span> (month, machine) <span class="keyword">not</span> <span class="keyword">in</span> down), name = <span class="string">"Capacity"</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># objective function</span></span><br><span class="line">obj = quicksum(</span><br><span class="line">    profit[product]*sell[month, product] - storeCost*held[month, product]</span><br><span class="line">    <span class="keyword">for</span> month <span class="keyword">in</span> months <span class="keyword">for</span> product <span class="keyword">in</span> products</span><br><span class="line">    )</span><br><span class="line"></span><br><span class="line">model.setObjective(obj, GRB.MAXIMIZE)</span><br><span class="line"></span><br><span class="line"><span class="comment"># solve model</span></span><br><span class="line">model.optimize()</span><br><span class="line"></span><br><span class="line"><span class="comment"># results</span></span><br><span class="line">model.printAttr(<span class="string">'X'</span>)</span><br></pre></td></tr></table></figure>
+<h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>Gurobi is a very powful mathematical programming solver, and Python is friendly to be used in modelling optimizaiton problem. Here I just post an example with code to learn how to use Gurobi solve real word planning problem. The orginal figures and codes are refer to <a href="https://www.gurobi.com/resources/seminars-and-videos/?category-filter=seminars-and-videos" target="_blank" rel="noopener">Gurobi seminars</a>.</p>
+
+    </div>
+
+    
+    
+    
+        
+      
+
+      <footer class="post-footer">
+          
+            
+          
+          <div class="post-tags">
+            
+              <a href="/tags/Gurobi/" rel="tag"># Gurobi</a>
+            
+              <a href="/tags/Optimization/" rel="tag"># Optimization</a>
+            
+          </div>
+        
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-next post-nav-item">
+              
+                <a href="/2019/10/12/Perceptron/" rel="next" title="Perceptron">
+                  <i class="fa fa-chevron-left"></i> Perceptron
+                </a>
+              
+            </div>
+
+            <span class="post-nav-divider"></span>
+
+            <div class="post-nav-prev post-nav-item">
+              
+            </div>
+          </div>
+        
+      </footer>
+    
+  </div>
+  
+  
+  
+  </article>
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+        
+        
+        
+        
+      
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Planning-Model"><span class="nav-number">1.</span> <span class="nav-text">Planning Model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Mathematical-Modeling"><span class="nav-number">2.</span> <span class="nav-text">Mathematical Modeling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Sets"><span class="nav-number">2.1.</span> <span class="nav-text">Sets</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parameters"><span class="nav-number">2.2.</span> <span class="nav-text">Parameters</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Varibales"><span class="nav-number">2.3.</span> <span class="nav-text">Varibales</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Objective-Function"><span class="nav-number">2.4.</span> <span class="nav-text">Objective Function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Constraints"><span class="nav-number">2.5.</span> <span class="nav-text">Constraints</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Gurobi-Python-Modeling"><span class="nav-number">3.</span> <span class="nav-text">Gurobi Python Modeling</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Basic-Gurobi-Concepts"><span class="nav-number">3.1.</span> <span class="nav-text">Basic Gurobi Concepts</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Solve-The-Planning-Model"><span class="nav-number">4.</span> <span class="nav-text">Solve The Planning Model</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Conclusion"><span class="nav-number">5.</span> <span class="nav-text">Conclusion</span></a></li></ol></div>
+        
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image"
+      src="/images/avatar.png"
+      alt="Jingfeng Yang">
+  <p class="site-author-name" itemprop="name">Jingfeng Yang</p>
+  <div class="site-description" itemprop="description">Life is like a box of chocolates. You never know what you're gonna get.</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+    
+      
+      
+      <div class="site-state-item site-state-tags">
+        
+          
+            <a href="/tags/">
+          
+        
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">tags</span>
+        </a>
+      </div>
+    
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liu Yue</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+      <span class="post-meta-item-text">Symbols count total: </span>
+    
+    <span title="Symbols count total">17k</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js?v=3.1.0"></script>
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
+<script src="/js/schemes/pisces.js?v=7.4.1"></script>
+<script src="/js/next-boot.js?v=7.4.1"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+  <script src="/js/local-search.js?v=7.4.1"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+    
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+  
+
+  
+
+  
+
+</body>
+</html>

@@ -55,22 +55,21 @@
   };
 </script>
 
-  <meta name="description" content="Model introducationLogistic Regression是一个分类模型，而不是回归模型. Logistic Regression回归的本质是：假设数据服从某个分布，然后用极大似然估计去做参数的估计.">
-<meta name="keywords" content="Machine Learning">
+  <meta name="description" content="这题是Leetcode第21题，难度为easy。 QuestionMerge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.">
+<meta name="keywords" content="Leetcode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Logistic Regression">
-<meta property="og:url" content="http://yoursite.com/2019/10/07/Logistic-Regression/index.html">
+<meta property="og:title" content="Merge Two Sorted List">
+<meta property="og:url" content="http://yoursite.com/2020/02/17/Merge-Two-Sorted-List/index.html">
 <meta property="og:site_name" content="YJF❤️LY">
-<meta property="og:description" content="Model introducationLogistic Regression是一个分类模型，而不是回归模型. Logistic Regression回归的本质是：假设数据服从某个分布，然后用极大似然估计去做参数的估计.">
+<meta property="og:description" content="这题是Leetcode第21题，难度为easy。 QuestionMerge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://yoursite.com/2019/10/07/Logistic-Regression/a1.JPG">
-<meta property="og:image" content="http://yoursite.com/2019/10/07/Logistic-Regression/PDF.png">
-<meta property="og:updated_time" content="2019-10-09T03:15:38.417Z">
+<meta property="og:image" content="http://yoursite.com/2020/02/17/Merge-Two-Sorted-List/MergeTwoSortedList.png">
+<meta property="og:updated_time" content="2020-02-17T07:48:16.106Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Logistic Regression">
-<meta name="twitter:description" content="Model introducationLogistic Regression是一个分类模型，而不是回归模型. Logistic Regression回归的本质是：假设数据服从某个分布，然后用极大似然估计去做参数的估计.">
-<meta name="twitter:image" content="http://yoursite.com/2019/10/07/Logistic-Regression/a1.JPG">
-  <link rel="canonical" href="http://yoursite.com/2019/10/07/Logistic-Regression/">
+<meta name="twitter:title" content="Merge Two Sorted List">
+<meta name="twitter:description" content="这题是Leetcode第21题，难度为easy。 QuestionMerge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.">
+<meta name="twitter:image" content="http://yoursite.com/2020/02/17/Merge-Two-Sorted-List/MergeTwoSortedList.png">
+  <link rel="canonical" href="http://yoursite.com/2020/02/17/Merge-Two-Sorted-List/">
 
 
 <script id="page-configurations">
@@ -84,7 +83,7 @@
   };
 </script>
 
-  <title>Logistic Regression | YJF❤️LY</title>
+  <title>Merge Two Sorted List | YJF❤️LY</title>
   
 
 
@@ -259,7 +258,7 @@
   
   
   <div class="post-block post">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/07/Logistic-Regression/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/17/Merge-Two-Sorted-List/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Jingfeng Yang">
@@ -271,7 +270,7 @@
       <meta itemprop="name" content="YJF❤️LY">
     </span>
       <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">Logistic Regression
+        <h1 class="post-title" itemprop="name headline">Merge Two Sorted List
 
           
         </h1>
@@ -288,20 +287,21 @@
                 
               
 
-              <time title="Created: 2019-10-07 15:24:36" itemprop="dateCreated datePublished" datetime="2019-10-07T15:24:36+08:00">2019-10-07</time>
+              <time title="Created: 2020-02-17 15:48:16" itemprop="dateCreated datePublished" datetime="2020-02-17T15:48:16+08:00">2020-02-17</time>
             </span>
           
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-09 11:15:38" itemprop="dateModified" datetime="2019-10-09T11:15:38+08:00">2019-10-09</time>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
               </span>
-            
+              <span class="post-meta-item-text">In</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Algorithm/" itemprop="url" rel="index"><span itemprop="name">Algorithm</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -313,7 +313,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span>2.6k</span>
+              <span>1.6k</span>
             </span>
           
 
@@ -326,45 +326,22 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Model-introducation"><a href="#Model-introducation" class="headerlink" title="Model introducation"></a>Model introducation</h2><p>Logistic Regression是一个分类模型，而不是回归模型. Logistic Regression回归的本质是：假设数据服从某个分布，然后用极大似然估计去做参数的估计.<a id="more"></a></p>
-<h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><p>设$X$是连续随机变量，$X$服从Logistic Regression是指$X$具有下列分布函数和密度函数：</p>
-<script type="math/tex; mode=display">F(x) = P(X \leq x) = \frac{1}{1+e^{-(x-\mu)/\gamma}}</script><script type="math/tex; mode=display">
-f(x) = F'(x) = \frac{e^{-(x-\mu)/\gamma}}{\gamma(1+e^{-(x-\mu)/\gamma})^2}</script><p>使用<code>Python matplotlib</code>以及<code>Numpy</code>生成logistic的概率分布函数和概率密度函数图像：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># import packages</span></span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># define parameters</span></span><br><span class="line">mu = <span class="number">0</span></span><br><span class="line">gamma = <span class="number">1</span></span><br><span class="line">x = np.linspace(<span class="number">-10</span>,<span class="number">10</span>,<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># define function</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">logistic</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> np.exp(-(x-mu)/gamma)/(gamma * (<span class="number">1</span>+np.exp(-(x-mu)/gamma))**<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">distribution</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>/(<span class="number">1</span>+np.exp(-(x-mu)/gamma))</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot figure</span></span><br><span class="line">y = logistic(x)</span><br><span class="line">z = distribution(x)</span><br><span class="line">plt.title(<span class="string">'Probability density function'</span>)</span><br><span class="line">plt.plot(x,y)</span><br><span class="line">plt.title(<span class="string">'prabability distribution function'</span>)</span><br><span class="line">plt.plot(x,z)</span><br></pre></td></tr></table></figure></p>
-<img src="/2019/10/07/Logistic-Regression/a1.JPG" title="This is probability density function">
-<img src="/2019/10/07/Logistic-Regression/PDF.png" title="This is probability distribution function">
-<p>对于概率分布函数，如果$\gamma$值越小，曲线在中心附近增长越快.</p>
-<h2 id="Binomial-logistic-regression-model"><a href="#Binomial-logistic-regression-model" class="headerlink" title="Binomial logistic regression model"></a>Binomial logistic regression model</h2><p>二项逻辑回归模型有如下的条件概率分布：</p>
-<script type="math/tex; mode=display">P(Y=1|x) = \frac{exp(w \cdot x+b)}{1+exp(w \cdot x +b)}</script><script type="math/tex; mode=display">P(Y=0|x) = \frac{1}{1+exp(w \cdot x+b)}</script><p>输入$x \in \mathbf{R}^{n}$，输出$Y\in{0,1}$, 参数$w\in \mathbf{R}^{n}, b \in \mathbf{R}$, $w \cdot x$是向量$w$和$x$的內积. 通过比较$P(Y=1|x)$和$P(Y=0|x)$大小，将$x$分类到概率大的那一类. </p>
-<h3 id="Definition-of-Odds"><a href="#Definition-of-Odds" class="headerlink" title="Definition of Odds"></a>Definition of Odds</h3><p><strong>几率</strong>:</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-& odds = \frac{p}{1-p}\\
-& logit(p) = log\frac{p}{1-p}\\
-& log\frac{P(Y=1|x)}{1-P(Y=1|x)}=w \cdot x + b
-\end{aligned}</script><p>所以，在逻辑回归中，输出$Y$的对数几率是输入$x$的线性函数，这就是Logistic Regression. 线性函数$w\cdot x$的值越接近正无穷，$P(Y=1|x)$越接近1，反之，越接近0.</p>
-<h2 id="Parameter-Estimation"><a href="#Parameter-Estimation" class="headerlink" title="Parameter Estimation"></a>Parameter Estimation</h2><p>给定已有的数据集$T=\{(x_{1},y_{1}), (x_{2},y_{2}), …, (x_{n},y_{n}) \}$, 其中$x_{i} \in \mathbf{R}, y_{i} \in \{0,1\}$. 下面介绍使用极大似然估计法(MLE)进行参数估计.</p>
-<h3 id="Maximum-Likelihood-Estimation"><a href="#Maximum-Likelihood-Estimation" class="headerlink" title="Maximum Likelihood Estimation"></a>Maximum Likelihood Estimation</h3><p>MLE是一种参数估计方法，假设某事件满足某种概率分布，但是参数不知道，根据事件的结果推算出参数的取值. 一般来说，事件$A$发生的概率和某一未知参数$\theta$有关，$\theta$不同，则事件$A$发生的概率$P(A|\theta)$也不同.一般认为当事件$A$发生时，$\theta$的取值是使概率$P(A|\theta)$最大的那一个.\<br>MLE的一般过程：</p>
-<ul>
-<li>写出似然函数</li>
-<li>取对数，整理</li>
-<li>求导</li>
-<li>求解似然方程 </li>
-</ul>
-<p>似然函数为：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-L(\theta) & = f(x_{1}|\theta)f(x_{2}|\theta)\cdot\cdot\cdot f(x_{n}|\theta) \\
-& = \prod_{i=1}^{N}[\pi(x_{i})]^{y_{i}}[1-\pi(x_{i})]^{1-y_{i}}
-\end{aligned}</script><p>对数似然函数为：</p>
-<script type="math/tex; mode=display">
-\begin{aligned}
-logL(\theta) & = \sum_{i=1}^{N}[y_{i}log\pi(x_{i})+(1-y_{i})log(1-\pi(x_{i}))] \\
-& = \sum_{i=1}^{N}\bigg[y_{i}log\frac{\pi(x_{i})}{1-\pi(x_{i})}+log(1-\pi(x_{i})\bigg] \\
-& = \sum_{i=1}^{N} \big[ y_{i}(w \cdot x_{i} + b) - log(1+exp(w\cdot x_{i} + b))\big]
-\end{aligned}</script><p>求解下面的最优化问题, 得到$\theta$最优值(梯度下降法，拟牛顿法): </p>
-<script type="math/tex; mode=display">max \{ logL(\theta) \}</script><h2 id="Multi-nominal-logistic-regression-model"><a href="#Multi-nominal-logistic-regression-model" class="headerlink" title="Multi-nominal logistic regression model"></a>Multi-nominal logistic regression model</h2><p>逻辑回归同时也可以用于多分类模型，假设输出是${1,2,…,K}$, 相应的概率为:</p>
-<script type="math/tex; mode=display">
-P(Y=k|x)=\frac{exp(w_{k}\cdot x)}{1+\sum_{k=1}^{K-1}exp(w_{k}\cdot x)}, \quad k=1,2,...,K-1</script><p>其中，$x\in \mathbf{R}^{n+1}, w_{k}\in \mathbf{R}^{n+1}$. 多元逻辑回归的参数估计方法和二元逻辑回归一样.</p>
+        <p>这题是Leetcode第21题，难度为easy。</p>
+<h2 id="Question"><a href="#Question" class="headerlink" title="Question"></a>Question</h2><p>Merge two sorted linked lists and return it as a new list. The new list should be made by splicing together the nodes of the first two lists.<br><a id="more"></a><br><strong>Example</strong><br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Input: 1-&gt;2-&gt;4, 1-&gt;3-&gt;4</span><br><span class="line">Output: 1-&gt;1-&gt;2-&gt;3-&gt;4-&gt;4</span><br></pre></td></tr></table></figure></p>
+<h2 id="Answer"><a href="#Answer" class="headerlink" title="Answer"></a>Answer</h2><p>首先，给出了<code>ListNode</code>类：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ListNode</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span> <span class="params">(x)</span>:</span></span><br><span class="line">        self.val = x</span><br><span class="line">        self.next = <span class="literal">None</span></span><br></pre></td></tr></table></figure></p>
+<p>此题有两种解法， 一种是迭代求解，一种是递归求解。首先我们使用迭代法，更加直观的理解问题。</p>
+<p><img src="MergeTwoSortedList.png" width="50%" height="50%"></p>
+<h3 id="迭代法-Iterative"><a href="#迭代法-Iterative" class="headerlink" title="迭代法(Iterative)"></a>迭代法(Iterative)</h3><p>首先，创建两个变量<code>newL</code>和<code>cur</code>，都指向对象<code>ListNode</code>。通过变量<code>cur</code>来改变<code>ListNode</code>的索引，步骤如图所示。代码如下：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">mergeTwoLists</span><span class="params">(self, l1: ListNode, l2: ListNode)</span> -&gt; ListNode:</span></span><br><span class="line">        newL = cur = ListNode(<span class="number">0</span>)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">while</span> l1 <span class="keyword">and</span> l2:</span><br><span class="line">            <span class="keyword">if</span> l1.val &lt;= l2.val:</span><br><span class="line">                cur.next = l1</span><br><span class="line">                l1 = l1.next</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                cur.next = l2</span><br><span class="line">                l2 = l2.next</span><br><span class="line">            cur = cur.next</span><br><span class="line">        cur.next = (l1 <span class="keyword">or</span> l2)</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">return</span> newL.next</span><br></pre></td></tr></table></figure></p>
+<p>此解法时间复杂度为$O(n+m)$，因为相当于遍历的<code>L1</code>和<code>L2</code>；空间复杂度为$O(1)$，只改变了指针引用。</p>
+<h3 id="回溯法（Recursion）"><a href="#回溯法（Recursion）" class="headerlink" title="回溯法（Recursion）"></a>回溯法（Recursion）</h3><p>我们可以将问题分解成小问题：</p>
+<ol>
+<li>如果<code>L1</code>和<code>L2</code>里有一个为空，那么直接返回<code>L1</code>或<code>L2</code>;</li>
+<li>如果<code>L1</code>和<code>L2</code>都不为空，则有两种情况：<script type="math/tex; mode=display">
+list1(0) + merge(list1[1:], list2) \quad if \quad list1[0] \le list2[0]</script><script type="math/tex; mode=display">
+list2(0) + merge(list1, list2[1:]) \quad if \quad list2[0] \le list1[0]</script>代码如下：<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">mergeTwoLists</span><span class="params">(self, l1: ListNode, l2: ListNode)</span> -&gt; ListNode:</span></span><br><span class="line">     <span class="keyword">if</span> l1 == <span class="literal">None</span>:</span><br><span class="line">         <span class="keyword">return</span> l2</span><br><span class="line">     <span class="keyword">elif</span> l2 == <span class="literal">None</span>:</span><br><span class="line">         <span class="keyword">return</span> l1</span><br><span class="line">     <span class="keyword">elif</span> l1.val &lt;= l2.val:</span><br><span class="line">         l1.next = self.mergeTwoLists(l1.next, l2)</span><br><span class="line">         <span class="keyword">return</span> l1</span><br><span class="line">     <span class="keyword">else</span>:</span><br><span class="line">         l2.next = self.mergeTwoLists(l1, l2.next)</span><br><span class="line">         <span class="keyword">return</span> l2</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<p>此解法时间复杂度为$O(n+m)$，空间复杂度为$O(n+m)$。</p>
 
     </div>
 
@@ -380,7 +357,7 @@ P(Y=k|x)=\frac{exp(w_{k}\cdot x)}{1+\sum_{k=1}^{K-1}exp(w_{k}\cdot x)}, \quad k=
           
           <div class="post-tags">
             
-              <a href="/tags/Machine-Learning/" rel="tag"># Machine Learning</a>
+              <a href="/tags/Leetcode/" rel="tag"># Leetcode</a>
             
           </div>
         
@@ -390,8 +367,8 @@ P(Y=k|x)=\frac{exp(w_{k}\cdot x)}{1+\sum_{k=1}^{K-1}exp(w_{k}\cdot x)}, \quad k=
           <div class="post-nav">
             <div class="post-nav-next post-nav-item">
               
-                <a href="/2019/10/05/Hexo-draft-generate/" rel="next" title="Hexo draft generate">
-                  <i class="fa fa-chevron-left"></i> Hexo draft generate
+                <a href="/2019/11/11/Gurobi-Python/" rel="next" title="Gurobi Modeling with Python">
+                  <i class="fa fa-chevron-left"></i> Gurobi Modeling with Python
                 </a>
               
             </div>
@@ -399,10 +376,6 @@ P(Y=k|x)=\frac{exp(w_{k}\cdot x)}{1+\sum_{k=1}^{K-1}exp(w_{k}\cdot x)}, \quad k=
             <span class="post-nav-divider"></span>
 
             <div class="post-nav-prev post-nav-item">
-              
-                <a href="/2019/10/12/Perceptron/" rel="prev" title="Perceptron">
-                  Perceptron <i class="fa fa-chevron-right"></i>
-                </a>
               
             </div>
           </div>
@@ -449,7 +422,7 @@ P(Y=k|x)=\frac{exp(w_{k}\cdot x)}{1+\sum_{k=1}^{K-1}exp(w_{k}\cdot x)}, \quad k=
 
       <!--noindex-->
       <div class="post-toc-wrap sidebar-panel">
-          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Model-introducation"><span class="nav-number">1.</span> <span class="nav-text">Model introducation</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Definition"><span class="nav-number">2.</span> <span class="nav-text">Definition</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Binomial-logistic-regression-model"><span class="nav-number">3.</span> <span class="nav-text">Binomial logistic regression model</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Definition-of-Odds"><span class="nav-number">3.1.</span> <span class="nav-text">Definition of Odds</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Parameter-Estimation"><span class="nav-number">4.</span> <span class="nav-text">Parameter Estimation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Maximum-Likelihood-Estimation"><span class="nav-number">4.1.</span> <span class="nav-text">Maximum Likelihood Estimation</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Multi-nominal-logistic-regression-model"><span class="nav-number">5.</span> <span class="nav-text">Multi-nominal logistic regression model</span></a></li></ol></div>
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Question"><span class="nav-number">1.</span> <span class="nav-text">Question</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Answer"><span class="nav-number">2.</span> <span class="nav-text">Answer</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#迭代法-Iterative"><span class="nav-number">2.1.</span> <span class="nav-text">迭代法(Iterative)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#回溯法（Recursion）"><span class="nav-number">2.2.</span> <span class="nav-text">回溯法（Recursion）</span></a></li></ol></li></ol></div>
         
       </div>
       <!--/noindex-->

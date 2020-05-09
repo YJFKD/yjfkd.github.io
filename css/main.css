@@ -375,7 +375,7 @@ pre,
 }
 pre,
 code {
-  font-family: 'Monaco', consolas, Menlo, monospace, "PingFang SC", "Microsoft YaHei";
+  font-family: 'Consolas', consolas, Menlo, monospace, "PingFang SC", "Microsoft YaHei";
 }
 code {
   overflow-wrap: break-word;
@@ -1156,7 +1156,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #14e5ff;
+  background: #faf2ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;

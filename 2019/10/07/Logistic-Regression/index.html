@@ -17,7 +17,7 @@
 
 <link rel="stylesheet" href="/css/main.css?v=7.4.1">
 
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic|Monaco:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Noto Serif SC:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
@@ -262,7 +262,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/07/Logistic-Regression/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Jingfeng Yang">
+      <meta itemprop="name" content="YJFKD">
       <meta itemprop="description" content="Life is like a box of chocolates. You never know what you're gonna get.">
       <meta itemprop="image" content="/images/avatar.png">
     </span>
@@ -305,6 +305,20 @@
           
 
           
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+        
+      
+      <span class="post-meta-item-text">Disqus: </span>
+    
+    <a title="disqus" href="/2019/10/07/Logistic-Regression/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/07/Logistic-Regression/" itemprop="commentCount"></span></a>
+  </span>
+  
+  
           
             <span class="post-meta-item" title="Symbols count in article">
               <span class="post-meta-item-icon">
@@ -420,6 +434,15 @@ P(Y=k|x)=\frac{exp(w_{k}\cdot x)}{1+\sum_{k=1}^{K-1}exp(w_{k}\cdot x)}, \quad k=
 
           </div>
           
+    
+    
+  <div class="comments" id="comments">
+    <div id="disqus_thread">
+      <noscript>Please enable JavaScript to view the comments powered by Disqus.</noscript>
+    </div>
+  </div>
+  
+  
 
         </div>
           
@@ -458,8 +481,8 @@ P(Y=k|x)=\frac{exp(w_{k}\cdot x)}{1+\sum_{k=1}^{K-1}exp(w_{k}\cdot x)}, \quad k=
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
     <img class="site-author-image" itemprop="image"
       src="/images/avatar.png"
-      alt="Jingfeng Yang">
-  <p class="site-author-name" itemprop="name">Jingfeng Yang</p>
+      alt="YJFKD">
+  <p class="site-author-name" itemprop="name">YJFKD</p>
   <div class="site-description" itemprop="description">Life is like a box of chocolates. You never know what you're gonna get.</div>
 </div>
 <div class="site-state-wrap motion-element">
@@ -641,6 +664,38 @@ P(Y=k|x)=\frac{exp(w_{k}\cdot x)}{1+\sum_{k=1}^{K-1}exp(w_{k}\cdot x)}, \quad k=
   
 
   
+
+<script>
+  function loadCount() {
+    var d = document, s = d.createElement('script');
+    s.src = 'https://YJFKD.disqus.com/count.js';
+    s.id = 'dsq-count-scr';
+    (d.head || d.body).appendChild(s);
+  }
+  // defer loading until the whole page loading is completed
+  window.addEventListener('load', loadCount, false);
+</script>
+<script>
+  function disqus_config() {
+    this.page.url = "http://yoursite.com/2019/10/07/Logistic-Regression/";
+    this.page.identifier = "2019/10/07/Logistic-Regression/";
+    this.page.title = 'Logistic Regression';};
+  function loadComments() {
+    if (window.DISQUS) {
+      DISQUS.reset({
+        reload: true,
+        config: disqus_config
+      });
+    } else {
+      var d = document, s = d.createElement('script');
+      s.src = 'https://YJFKD.disqus.com/embed.js';
+      s.setAttribute('data-timestamp', '' + +new Date());
+      (d.head || d.body).appendChild(s);
+    }
+  }
+    window.addEventListener('load', loadComments, false);
+  
+</script>
 
 </body>
 </html>

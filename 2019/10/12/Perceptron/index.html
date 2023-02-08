@@ -4,12 +4,12 @@
 
 
 
-<html lang="zh-Hans">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 6.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
@@ -17,7 +17,7 @@
 
 <link rel="stylesheet" href="/css/main.css?v=7.4.1">
 
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Garamond:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=EB Garamond， 'Noto Serif SC':300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
@@ -47,27 +47,27 @@
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
-      copy_button: 'Copy',
-      copy_success: 'Copied',
-      copy_failure: 'Copy failed'
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
     },
     sidebarPadding: 40
   };
 </script>
 
-  <meta name="description" content="这篇文章主要是记录《统计学习基础》第二章感知机的学习过程。 Definition感知机(Perceptron)是二分类的线性分类模型(Linear classification Model)，感知机学习是训练出一个可以将输入数据进行线性分离的超平面:  f(x)=sign(w\cdot x+b)where $x\in \mathbf{R}^{n}, w\in \mathbf{R}^{n}$">
-<meta name="keywords" content="Machine Learning">
+  <meta name="description" content="这篇文章主要是记录《统计学习基础》第二章感知机的学习过程。 Definition感知机(Perceptron)是二分类的线性分类模型(Linear classification Model)，感知机学习是训练出一个可以将输入数据进行线性分离的超平面:  f(x)&#x3D;sign(w\cdot x+b)where $x\in \mathbf{R}^{n}, w\in \mathbf{R}^{n}$">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Perceptron">
 <meta property="og:url" content="http://yoursite.com/2019/10/12/Perceptron/index.html">
-<meta property="og:site_name" content="YJF❤️LY">
-<meta property="og:description" content="这篇文章主要是记录《统计学习基础》第二章感知机的学习过程。 Definition感知机(Perceptron)是二分类的线性分类模型(Linear classification Model)，感知机学习是训练出一个可以将输入数据进行线性分离的超平面:  f(x)=sign(w\cdot x+b)where $x\in \mathbf{R}^{n}, w\in \mathbf{R}^{n}$">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:site_name" content="YJFKD">
+<meta property="og:description" content="这篇文章主要是记录《统计学习基础》第二章感知机的学习过程。 Definition感知机(Perceptron)是二分类的线性分类模型(Linear classification Model)，感知机学习是训练出一个可以将输入数据进行线性分离的超平面:  f(x)&#x3D;sign(w\cdot x+b)where $x\in \mathbf{R}^{n}, w\in \mathbf{R}^{n}$">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://yoursite.com/2019/10/12/Perceptron/distance.png">
-<meta property="og:updated_time" content="2019-10-12T13:04:24.996Z">
+<meta property="article:published_time" content="2019-10-12T13:04:24.000Z">
+<meta property="article:modified_time" content="2023-02-08T14:58:08.324Z">
+<meta property="article:author" content="YJFKD">
+<meta property="article:tag" content="Machine Learning">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Perceptron">
-<meta name="twitter:description" content="这篇文章主要是记录《统计学习基础》第二章感知机的学习过程。 Definition感知机(Perceptron)是二分类的线性分类模型(Linear classification Model)，感知机学习是训练出一个可以将输入数据进行线性分离的超平面:  f(x)=sign(w\cdot x+b)where $x\in \mathbf{R}^{n}, w\in \mathbf{R}^{n}$">
 <meta name="twitter:image" content="http://yoursite.com/2019/10/12/Perceptron/distance.png">
   <link rel="canonical" href="http://yoursite.com/2019/10/12/Perceptron/">
 
@@ -83,7 +83,7 @@
   };
 </script>
 
-  <title>Perceptron | YJF❤️LY</title>
+  <title>Perceptron | YJFKD</title>
   
 
 
@@ -119,7 +119,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
   <div class="container use-motion">
     <div class="headband"></div>
 
@@ -130,14 +130,14 @@
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">YJF❤️LY</span>
+        <span class="site-title">YJFKD</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
   </div>
 
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
+    <div class="toggle" aria-label="切换导航栏">
       <span class="toggle-line toggle-line-first"></span>
       <span class="toggle-line toggle-line-middle"></span>
       <span class="toggle-line toggle-line-last"></span>
@@ -157,7 +157,7 @@
       
     
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
       
@@ -168,7 +168,7 @@
       
     
 
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
 
   </li>
       
@@ -179,7 +179,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
 
   </li>
       
@@ -190,7 +190,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
 
   </li>
       
@@ -201,13 +201,13 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
       <li class="menu-item menu-item-search">
         <a href="javascript:;" class="popup-trigger">
         
-          <i class="fa fa-search fa-fw"></i>Search</a>
+          <i class="fa fa-search fa-fw"></i>搜索</a>
       </li>
     
   </ul>
@@ -221,7 +221,7 @@
   </span>
   <div class="search-input-container">
     <input autocomplete="off" autocorrect="off" autocapitalize="none"
-           placeholder="Searching..." spellcheck="false"
+           placeholder="搜索..." spellcheck="false"
            type="text" id="search-input">
   </div>
   <span class="popup-btn-close">
@@ -267,7 +267,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YJF❤️LY">
+      <meta itemprop="name" content="YJFKD">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">Perceptron
@@ -281,14 +281,26 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
+              <span class="post-meta-item-text">发表于</span>
 
               
                 
               
 
-              <time title="Created: 2019-10-12 21:04:24" itemprop="dateCreated datePublished" datetime="2019-10-12T21:04:24+08:00">2019-10-12</time>
+              <time title="创建时间：2019-10-12 21:04:24" itemprop="dateCreated datePublished" datetime="2019-10-12T21:04:24+08:00">2019-10-12</time>
             </span>
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-02-08 22:58:08" itemprop="dateModified" datetime="2023-02-08T22:58:08+08:00">2023-02-08</time>
+              </span>
+            
           
 
           
@@ -300,19 +312,19 @@
       </span>
         
       
-      <span class="post-meta-item-text">Disqus: </span>
+      <span class="post-meta-item-text">Disqus：</span>
     
     <a title="disqus" href="/2019/10/12/Perceptron/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/12/Perceptron/" itemprop="commentCount"></span></a>
   </span>
   
   
           
-            <span class="post-meta-item" title="Symbols count in article">
+            <span class="post-meta-item" title="本文字数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Symbols count in article: </span>
+                <span class="post-meta-item-text">本文字数：</span>
               
               <span>5.6k</span>
             </span>
@@ -330,7 +342,7 @@
         <p>这篇文章主要是记录《统计学习基础》第二章感知机的学习过程。</p>
 <h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><p>感知机(Perceptron)是二分类的线性分类模型(Linear classification Model)，感知机学习是训练出一个可以将输入数据进行线性分离的超平面:</p>
 <script type="math/tex; mode=display">
-f(x)=sign(w\cdot x+b)</script><p>where $x\in \mathbf{R}^{n}, w\in \mathbf{R}^{n}$<br><a id="more"></a></p>
+f(x)=sign(w\cdot x+b)</script><p>where $x\in \mathbf{R}^{n}, w\in \mathbf{R}^{n}$<br><span id="more"></span></p>
 <script type="math/tex; mode=display">
 sign(x)=
 \begin{cases}
@@ -338,19 +350,19 @@ sign(x)=
 -1, \quad x \lt0 
 \end{cases}</script><p>$sign$是感知机的激活函数，和Logistic Regression的激活函数$sigmod$不同。</p>
 <p>给定一个线性方程: $w\cdot x+b=0$, 对应于$\mathbf{R}^{n}$中的一个超平面。$w$是超平面的法向量, $b$是超平面的截距。</p>
-<h3 id="Distance-Calculation"><a href="#Distance-Calculation" class="headerlink" title="Distance Calculation"></a>Distance Calculation</h3><p>对于平面上的两点: $x_{1}, x_{2}$满足线性方程:</p>
+<h3 id="Distance-Calculation"><a href="#Distance-Calculation" class="headerlink" title="Distance Calculation"></a>Distance Calculation</h3><p>对于平面上的两点: $x<em>{1}, x</em>{2}$满足线性方程:</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
 w\cdot x_{1}+b & =0 \\
 w\cdot x_{2}+b & =0 \\
 w(x_{1}-x_{2}) & =0 \\
 \end{aligned}</script><p>所以$w$是超平面的法向量。</p>
-<h2 id="Learning-Policy"><a href="#Learning-Policy" class="headerlink" title="Learning Policy"></a>Learning Policy</h2><p>给定一个数据集 $T=\{ (x_{1},y_{1}), (x_{2},y_{2}),…,(x_{n},y_{n}) \}$, 假设存在某个超平面$S$:</p>
+<h2 id="Learning-Policy"><a href="#Learning-Policy" class="headerlink" title="Learning Policy"></a>Learning Policy</h2><p>给定一个数据集 $T={ (x<em>{1},y</em>{1}), (x<em>{2},y</em>{2}),…,(x<em>{n},y</em>{n}) }$, 假设存在某个超平面$S$:</p>
 <script type="math/tex; mode=display">
-w\cdot x+b=0</script><p>可以将正实例和负实例点正确的划分到超平面的两侧: If $y_{i} = +1, \rightarrow w\cdot x+b \gt 0$ and $y_{i}=-1 \rightarrow w\cdot x+b \lt 0$. 则称数据集$T$是线性可分的(Linearly separable dataset)。</p>
+w\cdot x+b=0</script><p>可以将正实例和负实例点正确的划分到超平面的两侧: If $y<em>{i} = +1, \rightarrow w\cdot x+b \gt 0$ and $y</em>{i}=-1 \rightarrow w\cdot x+b \lt 0$. 则称数据集$T$是线性可分的(Linearly separable dataset)。</p>
 <h3 id="Loss-Objective"><a href="#Loss-Objective" class="headerlink" title="Loss Objective"></a>Loss Objective</h3><p>Loss Function定义为误分类点到超平面$S$的总距离。那么如何计算空间中的一点$x_{i}$到超平面$S$的距离呢？我们先考虑简单的三维情况: </p>
 <p><img src="distance.png" width="40%" height="20%"></p>
-<p>给定平面$S$上一点$P=[x_{0},y_{0},z_{0}]$, 空间内一点$Q=[x_{1},y_{1},z_{1}]$，法向量$n=[w_{1},w_{2},w_{3}]$, 有:</p>
+<p>给定平面$S$上一点$P=[x<em>{0},y</em>{0},z<em>{0}]$, 空间内一点$Q=[x</em>{1},y<em>{1},z</em>{1}]$，法向量$n=[w<em>{1},w</em>{2},w_{3}]$, 有:</p>
 <script type="math/tex; mode=display">
 w_{1}x_{0} + w_{2}y_{0} + w_{3}z_{0} + b = 0</script><p>计算图中$Q$到平面$S$的距离:</p>
 <script type="math/tex; mode=display">
@@ -365,7 +377,7 @@ D & = |PQ|\cos\theta \\
 \begin{aligned}
 D & = \frac{|w\cdot x_{0}+b|}{\sqrt{w_{1}+w_{2}+...+w_{n}}} \\
 & = \frac{|w\cdot x_{0}+b|}{\| w \|}
-\end{aligned}</script><p>这里$\|w\|$表示$w$的$L_{2}$范数。这里我们只关心分类错误的数据$(x_{i},y_{i})$, 我们有以下关系:</p>
+\end{aligned}</script><p>这里$\|w\|$表示$w$的$L<em>{2}$范数。这里我们只关心分类错误的数据$(x</em>{i},y_{i})$, 我们有以下关系:</p>
 <script type="math/tex; mode=display">
 w\cdot x_{i}+b\gt0 \rightarrow y_{i}=-1\\
 w\cdot x_{i}+b\lt0 \rightarrow y_{i}=+1</script><p>所以:</p>
@@ -381,23 +393,23 @@ L(w,b)=-\sum_{x_{i}\in M}y_{i}(w\cdot x_{i}+b)</script><p>如果没有误分类�
 \begin{aligned}
 \nabla_{w}L(w,b) & =-\sum_{x_{i}\in M}y_{i}x_{i} \\\\
 \nabla_{b}L(w,b) & =-\sum_{x_{i}\in M}y_{i}
-\end{aligned}</script><p>随机选取$(x_{i},y_{i})$，对$w,b$进行更新，其中$\eta(0\lt \eta \le 1)$为学习率(learning rate):</p>
+\end{aligned}</script><p>随机选取$(x<em>{i},y</em>{i})$，对$w,b$进行更新，其中$\eta(0\lt \eta \le 1)$为学习率(learning rate):</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
     w &\leftarrow w - \eta(-y_{i}x_{i}) \\\\
     b &\leftarrow b - \eta(-y_{i})
 \end{aligned}</script><p>算法过程如下:</p>
 <ol>
-<li>输入: $(x_{1},y_{1}),…,(x_{n},y_{n})$，$\eta(0\lt\eta\le1)$，输出: $w,b,f(x)=sign(w\cdot x+b)$</li>
-<li>选取 $w_{0},b_{0}$</li>
-<li>随机选取数据 $(x_{i},y_{i})$</li>
-<li>如果 $y_{i}(w\cdot x_{i}+b)\le0$，更新$w,b$</li>
+<li>输入: $(x<em>{1},y</em>{1}),…,(x<em>{n},y</em>{n})$，$\eta(0\lt\eta\le1)$，输出: $w,b,f(x)=sign(w\cdot x+b)$</li>
+<li>选取 $w<em>{0},b</em>{0}$</li>
+<li>随机选取数据 $(x<em>{i},y</em>{i})$</li>
+<li>如果 $y<em>{i}(w\cdot x</em>{i}+b)\le0$，更新$w,b$</li>
 <li>回到(2)，直至没有误分类点</li>
 </ol>
 <p>在上述算法中，步骤(2,3)是随机性的，因此，感知机在学习过程中如果采取不同的初值或是不同的误分类点进行$w,b$的更新，得到的超平面$S$是可以不同的。</p>
 <h3 id="Convergence-Analysis"><a href="#Convergence-Analysis" class="headerlink" title="Convergence Analysis"></a>Convergence Analysis</h3><p>对于一个线性可分的数据集，通过上述算法，是否一定可以得到一个分类完全正确的超平面 $S$ 呢？下面梳理一下Novikoff定理得证明过程。<br><strong>Novikoff</strong>: </p>
 <ol>
-<li>存在满足条件$\| w_{opt} \| = 1$的超平面$w_{opt}\cdot x+b_{opt}=0$将数据集完全正确分开；且存在$\gamma\gt0$，满足：$y_{i}(w_{opt}\cdot x_{i}+b_{opt})\ge\gamma$，对于$i=0,1,2,…,N$</li>
+<li>存在满足条件$\| w<em>{opt} \| = 1$的超平面$w</em>{opt}\cdot x+b<em>{opt}=0$将数据集完全正确分开；且存在$\gamma\gt0$，满足：$y</em>{i}(w<em>{opt}\cdot x</em>{i}+b_{opt})\ge\gamma$，对于$i=0,1,2,…,N$</li>
 <li>令$R=max\|x_{i}\|, i\in 1,2,…,N$，训练算法的迭代次数$k$满足:<script type="math/tex; mode=display">
 k\leq\bigg(\frac{R}{\gamma}\bigg)^2</script></li>
 </ol>
@@ -434,13 +446,13 @@ k\eta\gamma \le \hat{w}_{k}\cdot \hat{w}_{opt} \le \| \hat{w}_{k} \| \| \hat{w}_
 \Downarrow \\
 k^{2}\gamma^{2} \le kR^{2} \\
 \Downarrow \\
-k \le \bigg(\frac{R}{\gamma}\bigg)^{2}</script><p>得证，算法迭代次数$k$具有上界，所以算法是收敛的。如果数据集是不可分的，那么算法不会收敛，将产生震荡。感知机和支持向量机(SVM)的区别在于支持向量机对产生的超平面进行了约束，确保了只能产生唯一一个超平面，而感知机存在多个超平面，和算法中选取的$w,b$初值以及误分类点$(x_{i},y_{i})$的选择有关。</p>
+k \le \bigg(\frac{R}{\gamma}\bigg)^{2}</script><p>得证，算法迭代次数$k$具有上界，所以算法是收敛的。如果数据集是不可分的，那么算法不会收敛，将产生震荡。感知机和支持向量机(SVM)的区别在于支持向量机对产生的超平面进行了约束，确保了只能产生唯一一个超平面，而感知机存在多个超平面，和算法中选取的$w,b$初值以及误分类点$(x<em>{i},y</em>{i})$的选择有关。</p>
 <h2 id="Dual-Form"><a href="#Dual-Form" class="headerlink" title="Dual Form"></a>Dual Form</h2><p>在原算法中，通过对$w,b$的更新，得到最终的最优值。$w,b$的更新公式如下:</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
 w &\leftarrow w + \eta y_{i}x_{i} \\
 b &\leftarrow b + \eta y_{i}
-\end{aligned}</script><p>假设算法经过$n$次达到收敛，每次选择$(x_{i},y_{i})$进行参数更新时，$\Delta w=\eta y_{i}x_{i}, \Delta b = \eta y_{i}$。假设在算法收敛过程中，点$(x_{i},y_{i})$共被选择了$n_{i}$次，那么最终得到的$w,b$为：</p>
+\end{aligned}</script><p>假设算法经过$n$次达到收敛，每次选择$(x<em>{i},y</em>{i})$进行参数更新时，$\Delta w=\eta y<em>{i}x</em>{i}, \Delta b = \eta y<em>{i}$。假设在算法收敛过程中，点$(x</em>{i},y<em>{i})$共被选择了$n</em>{i}$次，那么最终得到的$w,b$为：</p>
 <script type="math/tex; mode=display">
 \begin{aligned}
 w &= \sum_{i=1}^{N} n_{i}\eta y_{i}x_{i} \\
@@ -453,11 +465,11 @@ f(x) &=sign(w\cdot x+b) \\
 \end{aligned}</script><p>算法步骤为：</p>
 <ol>
 <li>初始化$n_{i}=0, \forall i\in N$，$N$表示总的分类点数；</li>
-<li>随机选取数据$(x_{i},y_{i})$；</li>
-<li>如果$y_{i}(\sum_{i=1}^{N} n_{i}\eta y_{i}x_{i}\cdot x + \sum_{i=1}^{N} n_{i}\eta y_{i})\le 0$，$n_{i} = n_{i}+1$；</li>
+<li>随机选取数据$(x<em>{i},y</em>{i})$；</li>
+<li>如果$y<em>{i}(\sum</em>{i=1}^{N} n<em>{i}\eta y</em>{i}x<em>{i}\cdot x + \sum</em>{i=1}^{N} n<em>{i}\eta y</em>{i})\le 0$，$n<em>{i} = n</em>{i}+1$；</li>
 <li>到$(2)$，直到数据全部分类正确。</li>
 </ol>
-<p><strong>总结</strong>：对偶形式和原始形式的差别在于参数的更新，原始中我们迭代更新$w,b$，而在对偶形式中我们更新随机选择误分类点的次数$n_{i}$。对偶形式相对原始形式在某种情况下会有计算更快的优势。在原始形式中，每次迭代，需要计算$w\cdot x$的內积, 其中$w,x\in \mathbf{R}^{n}$，计算量为$n \times n$。而在对偶形式中，则需要计算$x_{i}\cdot x_{j}$，计算量为$N \times N$。因此在分类数据点维数$n$很大时，使用对偶形式可以减轻计算复杂度。</p>
+<p><strong>总结</strong>：对偶形式和原始形式的差别在于参数的更新，原始中我们迭代更新$w,b$，而在对偶形式中我们更新随机选择误分类点的次数$n<em>{i}$。对偶形式相对原始形式在某种情况下会有计算更快的优势。在原始形式中，每次迭代，需要计算$w\cdot x$的內积, 其中$w,x\in \mathbf{R}^{n}$，计算量为$n \times n$。而在对偶形式中，则需要计算$x</em>{i}\cdot x_{j}$，计算量为$N \times N$。因此在分类数据点维数$n$很大时，使用对偶形式可以减轻计算复杂度。</p>
 <h2 id="Conclusion"><a href="#Conclusion" class="headerlink" title="Conclusion"></a>Conclusion</h2><p>本片博文详细推导了感知机定义，目标函数，算法，以及对偶形式。其中涉及到了随机梯度下降法(SGD)，打算最近在学习复习下相应的优化算法。</p>
 
     </div>
@@ -543,10 +555,10 @@ f(x) &=sign(w\cdot x+b) \\
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
-          Table of Contents
+          文章目录
         </li>
         <li class="sidebar-nav-overview">
-          Overview
+          站点概览
         </li>
       </ul>
 
@@ -569,10 +581,10 @@ f(x) &=sign(w\cdot x+b) \\
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         
-          <a href="/archives/">
+          <a href="/archives/%20%7C%7C%20archive">
         
           <span class="site-state-item-count">7</span>
-          <span class="site-state-item-name">posts</span>
+          <span class="site-state-item-name">日志</span>
         </a>
       </div>
     
@@ -581,11 +593,11 @@ f(x) &=sign(w\cdot x+b) \\
       <div class="site-state-item site-state-categories">
         
           
-            <a href="/categories/">
+            <a href="/categories/%20%7C%7C%20th">
           
         
-        <span class="site-state-item-count">4</span>
-        <span class="site-state-item-name">categories</span>
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
         </a>
       </div>
     
@@ -594,11 +606,11 @@ f(x) &=sign(w\cdot x+b) \\
       <div class="site-state-item site-state-tags">
         
           
-            <a href="/tags/">
+            <a href="/tags/%20%7C%7C%20tags">
           
         
-        <span class="site-state-item-count">6</span>
-        <span class="site-state-item-name">tags</span>
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span>
         </a>
       </div>
     
@@ -619,7 +631,7 @@ f(x) &=sign(w\cdot x+b) \\
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
   <span class="with-love" id="animate">
     <i class="fa fa-heart"></i>
   </span>
@@ -628,9 +640,9 @@ f(x) &=sign(w\cdot x+b) \\
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-      <span class="post-meta-item-text">Symbols count total: </span>
+      <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="Symbols count total">21k</span>
+    <span title="站点总字数">23k</span>
 </div>
 
         
@@ -655,9 +667,17 @@ f(x) &=sign(w\cdot x+b) \\
   <script src="/lib/anime.min.js?v=3.1.0"></script>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
-<script src="/js/schemes/pisces.js?v=7.4.1"></script>
-<script src="/js/next-boot.js?v=7.4.1"></script>
+
+<script src="/js/utils.js?v=7.4.1.js"></script>
+
+<script src="/js/motion.js?v=7.4.1.js"></script>
+
+
+<script src="/js/schemes/pisces.js?v=7.4.1.js"></script>
+
+
+<script src="/js/next-boot.js?v=7.4.1.js"></script>
+
 
 
 
@@ -670,7 +690,9 @@ f(x) &=sign(w\cdot x+b) \\
 
 
 
-  <script src="/js/local-search.js?v=7.4.1"></script>
+  
+<script src="/js/local-search.js?v=7.4.1.js"></script>
+
 
 
 

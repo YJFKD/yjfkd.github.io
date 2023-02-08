@@ -4,12 +4,12 @@
 
 
 
-<html lang="zh-Hans">
+<html lang="zh-CN">
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
-<meta name="generator" content="Hexo 3.9.0">
+<meta name="generator" content="Hexo 6.3.0">
   <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.4.1">
   <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.4.1">
@@ -17,7 +17,7 @@
 
 <link rel="stylesheet" href="/css/main.css?v=7.4.1">
 
-<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Garamond:300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=EB Garamond， 'Noto Serif SC':300,300italic,400,400italic,700,700italic|Consolas:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
 <link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
 
@@ -47,28 +47,28 @@
     path: 'search.xml',
     motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     translation: {
-      copy_button: 'Copy',
-      copy_success: 'Copied',
-      copy_failure: 'Copy failed'
+      copy_button: '复制',
+      copy_success: '复制成功',
+      copy_failure: '复制失败'
     },
     sidebarPadding: 40
   };
 </script>
 
   <meta name="description" content="Model introducationLogistic Regression是一个分类模型，而不是回归模型. Logistic Regression回归的本质是：假设数据服从某个分布，然后用极大似然估计去做参数的估计.">
-<meta name="keywords" content="Machine Learning">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Logistic Regression">
 <meta property="og:url" content="http://yoursite.com/2019/10/07/Logistic-Regression/index.html">
-<meta property="og:site_name" content="YJF❤️LY">
+<meta property="og:site_name" content="YJFKD">
 <meta property="og:description" content="Model introducationLogistic Regression是一个分类模型，而不是回归模型. Logistic Regression回归的本质是：假设数据服从某个分布，然后用极大似然估计去做参数的估计.">
-<meta property="og:locale" content="zh-Hans">
+<meta property="og:locale" content="zh_CN">
 <meta property="og:image" content="http://yoursite.com/2019/10/07/Logistic-Regression/a1.JPG">
 <meta property="og:image" content="http://yoursite.com/2019/10/07/Logistic-Regression/PDF.png">
-<meta property="og:updated_time" content="2019-10-09T03:15:38.417Z">
+<meta property="article:published_time" content="2019-10-07T07:24:36.000Z">
+<meta property="article:modified_time" content="2023-02-08T14:58:08.299Z">
+<meta property="article:author" content="YJFKD">
+<meta property="article:tag" content="Machine Learning">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Logistic Regression">
-<meta name="twitter:description" content="Model introducationLogistic Regression是一个分类模型，而不是回归模型. Logistic Regression回归的本质是：假设数据服从某个分布，然后用极大似然估计去做参数的估计.">
 <meta name="twitter:image" content="http://yoursite.com/2019/10/07/Logistic-Regression/a1.JPG">
   <link rel="canonical" href="http://yoursite.com/2019/10/07/Logistic-Regression/">
 
@@ -84,7 +84,7 @@
   };
 </script>
 
-  <title>Logistic Regression | YJF❤️LY</title>
+  <title>Logistic Regression | YJFKD</title>
   
 
 
@@ -120,7 +120,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
   <div class="container use-motion">
     <div class="headband"></div>
 
@@ -131,14 +131,14 @@
     <div>
       <a href="/" class="brand" rel="start">
         <span class="logo-line-before"><i></i></span>
-        <span class="site-title">YJF❤️LY</span>
+        <span class="site-title">YJFKD</span>
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
   </div>
 
   <div class="site-nav-toggle">
-    <div class="toggle" aria-label="Toggle navigation bar">
+    <div class="toggle" aria-label="切换导航栏">
       <span class="toggle-line toggle-line-first"></span>
       <span class="toggle-line toggle-line-middle"></span>
       <span class="toggle-line toggle-line-last"></span>
@@ -158,7 +158,7 @@
       
     
 
-    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>Home</a>
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
 
   </li>
       
@@ -169,7 +169,7 @@
       
     
 
-    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>About</a>
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
 
   </li>
       
@@ -180,7 +180,7 @@
       
     
 
-    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>Tags</a>
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
 
   </li>
       
@@ -191,7 +191,7 @@
       
     
 
-    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>Categories</a>
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
 
   </li>
       
@@ -202,13 +202,13 @@
       
     
 
-    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>Archives</a>
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
 
   </li>
       <li class="menu-item menu-item-search">
         <a href="javascript:;" class="popup-trigger">
         
-          <i class="fa fa-search fa-fw"></i>Search</a>
+          <i class="fa fa-search fa-fw"></i>搜索</a>
       </li>
     
   </ul>
@@ -222,7 +222,7 @@
   </span>
   <div class="search-input-container">
     <input autocomplete="off" autocorrect="off" autocapitalize="none"
-           placeholder="Searching..." spellcheck="false"
+           placeholder="搜索..." spellcheck="false"
            type="text" id="search-input">
   </div>
   <span class="popup-btn-close">
@@ -268,7 +268,7 @@
     </span>
 
     <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="YJF❤️LY">
+      <meta itemprop="name" content="YJFKD">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">Logistic Regression
@@ -282,13 +282,13 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
-              <span class="post-meta-item-text">Posted on</span>
+              <span class="post-meta-item-text">发表于</span>
 
               
                 
               
 
-              <time title="Created: 2019-10-07 15:24:36" itemprop="dateCreated datePublished" datetime="2019-10-07T15:24:36+08:00">2019-10-07</time>
+              <time title="创建时间：2019-10-07 15:24:36" itemprop="dateCreated datePublished" datetime="2019-10-07T15:24:36+08:00">2019-10-07</time>
             </span>
           
             
@@ -298,8 +298,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
-                <span class="post-meta-item-text">Edited on</span>
-                <time title="Modified: 2019-10-09 11:15:38" itemprop="dateModified" datetime="2019-10-09T11:15:38+08:00">2019-10-09</time>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2023-02-08 22:58:08" itemprop="dateModified" datetime="2023-02-08T22:58:08+08:00">2023-02-08</time>
               </span>
             
           
@@ -313,19 +313,19 @@
       </span>
         
       
-      <span class="post-meta-item-text">Disqus: </span>
+      <span class="post-meta-item-text">Disqus：</span>
     
     <a title="disqus" href="/2019/10/07/Logistic-Regression/#comments" itemprop="discussionUrl"><span class="post-comments-count disqus-comment-count" data-disqus-identifier="2019/10/07/Logistic-Regression/" itemprop="commentCount"></span></a>
   </span>
   
   
           
-            <span class="post-meta-item" title="Symbols count in article">
+            <span class="post-meta-item" title="本文字数">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Symbols count in article: </span>
+                <span class="post-meta-item-text">本文字数：</span>
               
               <span>2.6k</span>
             </span>
@@ -340,13 +340,10 @@
     <div class="post-body" itemprop="articleBody">
 
       
-        <h2 id="Model-introducation"><a href="#Model-introducation" class="headerlink" title="Model introducation"></a>Model introducation</h2><p>Logistic Regression是一个分类模型，而不是回归模型. Logistic Regression回归的本质是：假设数据服从某个分布，然后用极大似然估计去做参数的估计.<a id="more"></a></p>
+        <h2 id="Model-introducation"><a href="#Model-introducation" class="headerlink" title="Model introducation"></a>Model introducation</h2><p>Logistic Regression是一个分类模型，而不是回归模型. Logistic Regression回归的本质是：假设数据服从某个分布，然后用极大似然估计去做参数的估计.<span id="more"></span></p>
 <h2 id="Definition"><a href="#Definition" class="headerlink" title="Definition"></a>Definition</h2><p>设$X$是连续随机变量，$X$服从Logistic Regression是指$X$具有下列分布函数和密度函数：</p>
 <script type="math/tex; mode=display">F(x) = P(X \leq x) = \frac{1}{1+e^{-(x-\mu)/\gamma}}</script><script type="math/tex; mode=display">
-f(x) = F'(x) = \frac{e^{-(x-\mu)/\gamma}}{\gamma(1+e^{-(x-\mu)/\gamma})^2}</script><p>使用<code>Python matplotlib</code>以及<code>Numpy</code>生成logistic的概率分布函数和概率密度函数图像：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># import packages</span></span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># define parameters</span></span><br><span class="line">mu = <span class="number">0</span></span><br><span class="line">gamma = <span class="number">1</span></span><br><span class="line">x = np.linspace(<span class="number">-10</span>,<span class="number">10</span>,<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># define function</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">logistic</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> np.exp(-(x-mu)/gamma)/(gamma * (<span class="number">1</span>+np.exp(-(x-mu)/gamma))**<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">distribution</span><span class="params">(x)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>/(<span class="number">1</span>+np.exp(-(x-mu)/gamma))</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot figure</span></span><br><span class="line">y = logistic(x)</span><br><span class="line">z = distribution(x)</span><br><span class="line">plt.title(<span class="string">'Probability density function'</span>)</span><br><span class="line">plt.plot(x,y)</span><br><span class="line">plt.title(<span class="string">'prabability distribution function'</span>)</span><br><span class="line">plt.plot(x,z)</span><br></pre></td></tr></table></figure></p>
-<img src="/2019/10/07/Logistic-Regression/a1.JPG" title="This is probability density function">
-<img src="/2019/10/07/Logistic-Regression/PDF.png" title="This is probability distribution function">
-<p>对于概率分布函数，如果$\gamma$值越小，曲线在中心附近增长越快.</p>
+f(x) = F'(x) = \frac{e^{-(x-\mu)/\gamma}}{\gamma(1+e^{-(x-\mu)/\gamma})^2}</script><p>使用<code>Python matplotlib</code>以及<code>Numpy</code>生成logistic的概率分布函数和概率密度函数图像：<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># import packages</span></span><br><span class="line"><span class="keyword">from</span> matplotlib <span class="keyword">import</span> pyplot <span class="keyword">as</span> plt</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"></span><br><span class="line"><span class="comment"># define parameters</span></span><br><span class="line">mu = <span class="number">0</span></span><br><span class="line">gamma = <span class="number">1</span></span><br><span class="line">x = np.linspace(-<span class="number">10</span>,<span class="number">10</span>,<span class="number">100</span>)</span><br><span class="line"></span><br><span class="line"><span class="comment"># define function</span></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">logistic</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> np.exp(-(x-mu)/gamma)/(gamma * (<span class="number">1</span>+np.exp(-(x-mu)/gamma))**<span class="number">2</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">def</span> <span class="title function_">distribution</span>(<span class="params">x</span>):</span><br><span class="line">    <span class="keyword">return</span> <span class="number">1</span>/(<span class="number">1</span>+np.exp(-(x-mu)/gamma))</span><br><span class="line"></span><br><span class="line"><span class="comment"># plot figure</span></span><br><span class="line">y = logistic(x)</span><br><span class="line">z = distribution(x)</span><br><span class="line">plt.title(<span class="string">&#x27;Probability density function&#x27;</span>)</span><br><span class="line">plt.plot(x,y)</span><br><span class="line">plt.title(<span class="string">&#x27;prabability distribution function&#x27;</span>)</span><br><span class="line">plt.plot(x,z)</span><br></pre></td></tr></table></figure><br><img src="/2019/10/07/Logistic-Regression/a1.JPG" class="" title="This is probability density function"><br><img src="/2019/10/07/Logistic-Regression/PDF.png" class="" title="This is probability distribution function"><br>对于概率分布函数，如果$\gamma$值越小，曲线在中心附近增长越快.</p>
 <h2 id="Binomial-logistic-regression-model"><a href="#Binomial-logistic-regression-model" class="headerlink" title="Binomial logistic regression model"></a>Binomial logistic regression model</h2><p>二项逻辑回归模型有如下的条件概率分布：</p>
 <script type="math/tex; mode=display">P(Y=1|x) = \frac{exp(w \cdot x+b)}{1+exp(w \cdot x +b)}</script><script type="math/tex; mode=display">P(Y=0|x) = \frac{1}{1+exp(w \cdot x+b)}</script><p>输入$x \in \mathbf{R}^{n}$，输出$Y\in{0,1}$, 参数$w\in \mathbf{R}^{n}, b \in \mathbf{R}$, $w \cdot x$是向量$w$和$x$的內积. 通过比较$P(Y=1|x)$和$P(Y=0|x)$大小，将$x$分类到概率大的那一类. </p>
 <h3 id="Definition-of-Odds"><a href="#Definition-of-Odds" class="headerlink" title="Definition of Odds"></a>Definition of Odds</h3><p><strong>几率</strong>:</p>
@@ -356,7 +353,7 @@ f(x) = F'(x) = \frac{e^{-(x-\mu)/\gamma}}{\gamma(1+e^{-(x-\mu)/\gamma})^2}</scri
 & logit(p) = log\frac{p}{1-p}\\
 & log\frac{P(Y=1|x)}{1-P(Y=1|x)}=w \cdot x + b
 \end{aligned}</script><p>所以，在逻辑回归中，输出$Y$的对数几率是输入$x$的线性函数，这就是Logistic Regression. 线性函数$w\cdot x$的值越接近正无穷，$P(Y=1|x)$越接近1，反之，越接近0.</p>
-<h2 id="Parameter-Estimation"><a href="#Parameter-Estimation" class="headerlink" title="Parameter Estimation"></a>Parameter Estimation</h2><p>给定已有的数据集$T=\{(x_{1},y_{1}), (x_{2},y_{2}), …, (x_{n},y_{n}) \}$, 其中$x_{i} \in \mathbf{R}, y_{i} \in \{0,1\}$. 下面介绍使用极大似然估计法(MLE)进行参数估计.</p>
+<h2 id="Parameter-Estimation"><a href="#Parameter-Estimation" class="headerlink" title="Parameter Estimation"></a>Parameter Estimation</h2><p>给定已有的数据集$T={(x<em>{1},y</em>{1}), (x<em>{2},y</em>{2}), …, (x<em>{n},y</em>{n}) }$, 其中$x<em>{i} \in \mathbf{R}, y</em>{i} \in {0,1}$. 下面介绍使用极大似然估计法(MLE)进行参数估计.</p>
 <h3 id="Maximum-Likelihood-Estimation"><a href="#Maximum-Likelihood-Estimation" class="headerlink" title="Maximum Likelihood Estimation"></a>Maximum Likelihood Estimation</h3><p>MLE是一种参数估计方法，假设某事件满足某种概率分布，但是参数不知道，根据事件的结果推算出参数的取值. 一般来说，事件$A$发生的概率和某一未知参数$\theta$有关，$\theta$不同，则事件$A$发生的概率$P(A|\theta)$也不同.一般认为当事件$A$发生时，$\theta$的取值是使概率$P(A|\theta)$最大的那一个.\<br>MLE的一般过程：</p>
 <ul>
 <li>写出似然函数</li>
@@ -463,10 +460,10 @@ P(Y=k|x)=\frac{exp(w_{k}\cdot x)}{1+\sum_{k=1}^{K-1}exp(w_{k}\cdot x)}, \quad k=
 
       <ul class="sidebar-nav motion-element">
         <li class="sidebar-nav-toc">
-          Table of Contents
+          文章目录
         </li>
         <li class="sidebar-nav-overview">
-          Overview
+          站点概览
         </li>
       </ul>
 
@@ -489,10 +486,10 @@ P(Y=k|x)=\frac{exp(w_{k}\cdot x)}{1+\sum_{k=1}^{K-1}exp(w_{k}\cdot x)}, \quad k=
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         
-          <a href="/archives/">
+          <a href="/archives/%20%7C%7C%20archive">
         
           <span class="site-state-item-count">7</span>
-          <span class="site-state-item-name">posts</span>
+          <span class="site-state-item-name">日志</span>
         </a>
       </div>
     
@@ -501,11 +498,11 @@ P(Y=k|x)=\frac{exp(w_{k}\cdot x)}{1+\sum_{k=1}^{K-1}exp(w_{k}\cdot x)}, \quad k=
       <div class="site-state-item site-state-categories">
         
           
-            <a href="/categories/">
+            <a href="/categories/%20%7C%7C%20th">
           
         
-        <span class="site-state-item-count">4</span>
-        <span class="site-state-item-name">categories</span>
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">分类</span>
         </a>
       </div>
     
@@ -514,11 +511,11 @@ P(Y=k|x)=\frac{exp(w_{k}\cdot x)}{1+\sum_{k=1}^{K-1}exp(w_{k}\cdot x)}, \quad k=
       <div class="site-state-item site-state-tags">
         
           
-            <a href="/tags/">
+            <a href="/tags/%20%7C%7C%20tags">
           
         
-        <span class="site-state-item-count">6</span>
-        <span class="site-state-item-name">tags</span>
+        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-name">标签</span>
         </a>
       </div>
     
@@ -539,7 +536,7 @@ P(Y=k|x)=\frac{exp(w_{k}\cdot x)}{1+\sum_{k=1}^{K-1}exp(w_{k}\cdot x)}, \quad k=
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2023</span>
   <span class="with-love" id="animate">
     <i class="fa fa-heart"></i>
   </span>
@@ -548,9 +545,9 @@ P(Y=k|x)=\frac{exp(w_{k}\cdot x)}{1+\sum_{k=1}^{K-1}exp(w_{k}\cdot x)}, \quad k=
     <span class="post-meta-item-icon">
       <i class="fa fa-area-chart"></i>
     </span>
-      <span class="post-meta-item-text">Symbols count total: </span>
+      <span class="post-meta-item-text">站点总字数：</span>
     
-    <span title="Symbols count total">21k</span>
+    <span title="站点总字数">23k</span>
 </div>
 
         
@@ -575,9 +572,17 @@ P(Y=k|x)=\frac{exp(w_{k}\cdot x)}{1+\sum_{k=1}^{K-1}exp(w_{k}\cdot x)}, \quad k=
   <script src="/lib/anime.min.js?v=3.1.0"></script>
   <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-<script src="/js/utils.js?v=7.4.1"></script><script src="/js/motion.js?v=7.4.1"></script>
-<script src="/js/schemes/pisces.js?v=7.4.1"></script>
-<script src="/js/next-boot.js?v=7.4.1"></script>
+
+<script src="/js/utils.js?v=7.4.1.js"></script>
+
+<script src="/js/motion.js?v=7.4.1.js"></script>
+
+
+<script src="/js/schemes/pisces.js?v=7.4.1.js"></script>
+
+
+<script src="/js/next-boot.js?v=7.4.1.js"></script>
+
 
 
 
@@ -590,7 +595,9 @@ P(Y=k|x)=\frac{exp(w_{k}\cdot x)}{1+\sum_{k=1}^{K-1}exp(w_{k}\cdot x)}, \quad k=
 
 
 
-  <script src="/js/local-search.js?v=7.4.1"></script>
+  
+<script src="/js/local-search.js?v=7.4.1.js"></script>
+
 
 
 
